@@ -1,0 +1,329 @@
+/** Post page **/
+.post-header {
+    margin-top: 80px;
+    margin-bottom: 80px;
+}
+
+.post-categories {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.post-categories a {
+    text-transform: uppercase;
+    color: #d52e40;
+    padding-bottom: 1px;
+    border-bottom: 2px solid #d52e40;
+    margin-left: 10px;
+}
+
+.post-title {
+    text-align: center;
+    font-weight: bold;
+    text-transform: capitalize;
+    font-size: 50px;
+}
+
+.post-meta {
+    text-align: center;
+    margin-top: 15px;
+}
+
+.post-meta-item {
+    margin-left: 15px;
+}
+
+.post-featured-media {
+    text-align: center;
+}
+
+.post-content {
+    margin: 50px auto 20px auto;
+    max-width: 600px;
+}
+
+.post-tags {
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 30px;
+    text-align: left;
+}
+
+.post-tags a {}
+
+.by-post-author {
+    margin-left: 10px;
+    font-weight: bold;
+    font-size: 12px;
+}
+
+.post-navigation {
+    overflow: hidden;
+}
+
+.post-navigation-link {
+    color: #d52e40;
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.post-prev-link {
+    float: left;
+}
+
+.post-next-link {
+    float: right;
+}
+
+.post-edit {
+    text-align: left;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 30px;
+}
+
+.post-comments {
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/** Discussion **/
+.comments .comment-items {
+    padding-left: 30px;
+    margin-top: 20px;
+}
+
+.comment-info img {
+    float: left;
+    margin-right: 10px;
+}
+
+.comment-content {}
+
+.comment-footer {
+    margin-top: 10px;
+}
+
+#btn-cancel-comment-reply {
+    display: block;
+    color: #d9534f;
+    font-size: 16px;
+    font-weight: bold;
+    text-align: center;
+}
+
+#comment-logged-in-as {
+    display: block;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+#comment_form {
+    margin-top: 20px;
+}
+
+.comment-notes {
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.comment-reply-container .comment-notes {
+    text-align: left;
+}
+
+.comment-reply-container #btn-cancel-comment-reply {
+    text-align: left;
+}
+
+.comment-reply-container #comment-logged-in-as {
+    text-align: left;
+}
+
+.comment-reply-container .comment-form-title {
+    text-align: left;
+}
+
+#comment_login {
+    margin-top: 20px;
+}
+
+/** Page Navigation **/
+.page-navs {
+    border-radius: 6px;
+    padding-left: 10px;
+    padding-right: 10px;
+    background: white;
+    display: none; /* display: inline-block; moved to media query */
+}
+.page-navs a {
+    color: #981220;
+    font-size: 18px;
+    text-transform: uppercase;
+    transition: 0.3s all ease-in;
+    -webkit-transition: 0.3s all ease-in;
+    -moz-transition: 0.3s all ease-in;
+    -o-transition: 0.3s all ease-in;
+    font-weight: normal;
+    line-height: 44px;
+    /*width: 200px;*/ /* for main menu */
+    width: auto;
+    min-height: 44px;
+    display: inline-block; /* display: block; */
+    background: #fff;
+    word-break: normal;
+        padding-left: 10px;
+    padding-right: 10px;
+}
+
+.page-navs ul ul a {  /* for all sub menus */
+    width: 150px;
+    padding-right: 20px;
+}
+
+.page-navs ul li  {
+  position: relative;
+  display: inline-block;
+  float: left;
+  text-align: center;
+  z-index: 99999;
+}
+
+.page-navs ul li ul li {  /* for all sub menus */
+    display: block;
+    float: none;
+}
+
+.page-navs ul li ul {
+  display: none;
+  position: absolute;
+  padding-top: 20px;
+}
+.page-navs ul li:hover > ul {
+    display: block;
+}
+
+/* for 2nd menu */
+.page-navs ul li ul {
+  padding-top: 20px;
+}
+
+/* for 3rd and so on menu */
+.page-navs li ul li  {
+    text-align: left;
+    background: #fff;
+}
+.page-navs li ul li ul  {
+    margin-left: 150px;
+    top: 0;
+    padding-left: 20px;
+    padding-top: 0;
+}
+
+.page-navs ul ul ul::after {
+   	content:'';
+    display: block;
+    width: 0;
+    height: 0;
+    border: 10px solid transparent;
+    border-right-color: #fff;
+    position: absolute;
+    top: 12px;
+    left: 0;
+    z-index: 99999999;
+}
+
+.page-navs ul li ul li .fa {
+    position: absolute;
+    top: 15px;
+    right: 5px;
+}
+
+/** Page Navigation Mobile **/
+.page-navs-m {
+    display: none; /*display: block;*/
+    background-color: rgba(210,210,210,0.9);
+    border-radius: 0px;
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 1111;
+    height: 100vh;
+    overflow: auto;
+    transition: all ease-in-out 0.3s;
+    -webkit-transition: all ease-in-out 0.3s;
+    -moz-transition: all ease-in-out 0.3s;
+    border: none;
+    padding: 15px 10px;
+}
+.page-navs-m a {
+    background: #fff;
+    color: #981220;
+    font-size: 18px;
+    text-transform: uppercase;
+    border-radius: 6px;
+    transition: 0.3s all ease-in;
+    -webkit-transition: 0.3s all ease-in;
+    -moz-transition: 0.3s all ease-in;
+    -o-transition: 0.3s all ease-in;
+    font-weight: normal;
+    line-height: 44px;
+    width: 118px;
+    height: 44px;
+    display: block;
+    text-align: left;
+    width: 100%;
+    border-radius: 0;
+    padding-left: 10px;
+}
+
+.page-navs-m a:hover {
+    background: #981220;
+    color: #fff;
+}
+
+.page-navs-m li ul {
+    margin-left: 15px;
+}
+
+.page-navs-m li {
+    position: relative;
+}
+
+.page-navs-m li button {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+}
+
+.page-navs-m #page-nav-close {
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+#page-nav-open {
+    display: block;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+@media only screen and (min-width: 700px) {
+    .page-navs {
+        display: inline-block;
+    }
+    .page-navs-m {
+        display: none;
+    }
+    #page-nav-open {
+        display: none;
+    }
+}
+
+
+

@@ -1,0 +1,4 @@
+# Disable access to current root folder configuration should point to public/index.php as document root
+<IfModule mod_negotiation.c>
+    Options -MultiViews -Indexes
+</IfModule>

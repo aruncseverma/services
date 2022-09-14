@@ -1,0 +1,1064 @@
+/*
+Site Name: Escort Services
+CSS/Theme URL: https://escortservices.com
+Description: PSD to Responsive HTML5 by AdultDC
+Author: AdultDC
+Author URL: https://adultdc.com/
+*/
+@media only screen and (max-width:1900px){
+.centerwrap{width:1560px;}
+.grid{margin:0 -0.5%;}
+.grid-item{margin:0 0.5% 1%; width:15.66%;}
+.grid-item2{margin:0 0.5% 1%; width:15.66%;}
+.escortFilterD li{font-size:19px;}
+.escortFilterD li a{line-height:42px;}
+.genderFilter button{width:23.5%;}
+.genderFilter{width:15.8%;}
+.escortArea{/*margin-left:1%;*/ font-size:21px; /*width:calc(100% - 16.8%);*/}
+.headerRight nav ul li{font-size:20px;}
+.searchDrop{width:calc(100% - 16.8%);}
+.searchID{font-size:32px;}
+.escortArea i{font-size:22px;}
+.changeLo{font-size:20px;}
+.modelName{font-size:17px;}
+.basicSearch{padding-top:20px;}
+
+.resp-tabs-list li{font-size:26px; line-height:70px;}
+.changeLocation:before{right:40px;}
+
+/* Blog */
+.blogLeft{width:24%;}
+.blogRight{width:74%; padding:50px 50px 0;}
+.blogFPic{width:40%;}
+.blogFDetails{width:57%;}
+.blogFDetails h2{font-size:32px;}
+.author{font-size:16px;}
+.blogFDetails p{font-size:16px; padding-bottom:18px;}
+.readMore{font-size:14px;}
+.blogPosts{margin:0 -1.5%;}
+.bpost{width:30.33%; margin:1% 1.5% 2%;}
+.blogFeatured{padding-bottom:3%; margin-bottom:2%;}
+.bCaption{padding:12px 22px;}
+.bCaption h3{font-size:22px;}
+.blogArea{padding-bottom:150px;}
+
+/* Blog Inner */
+.blogPost h2{font-size:45px;}
+.blogContent p{font-size:17px;}
+
+/* contact */
+.contactRight{width:calc(100% - 300px);}
+.contactFL{width:61%;}
+.contactFR{width:36%;}
+.thankMsg{font-size:22px;}
+
+/* FAQ */
+.faqRight{width:calc(100% - 300px);}
+
+/* Register */
+.registerArea{padding-bottom:280px;}
+.registerType{width:32.4%;}
+
+/* Register Inner */
+.registerL{width:450px;}
+.registerR{width:calc(100% - 470px);}
+.regFL{width:49%;}
+.regFR{width:49%;}
+
+/* Thank You*/
+.thankYou{width:450px; height:348px;}
+.thankuR{width:calc(100% - 470px);}
+
+/* Agencies */
+.agencyName{font-size:17px;}
+.escortCount{font-size:14px;}
+.country{font-size:14px;}
+
+/* Agency Details */
+.agencyDetails{/*margin-top:60px;*/ margin-bottom:180px; padding:22px 38px 0 38px;}
+.agencyOptions .grid{margin:0 -1%;}
+.agencyOptions .grid-item{width:23%; margin:0 1% 2%;}
+.agencyOptions .grid-item2{width:23%; margin:0 1% 2%;}
+.agencyLeft{width:320px;}
+.agencyRight{width:calc(100% - 350px); }
+
+/* Profile */
+.profileLeft{width:460px;}
+.profileRight{width:calc(100% - 484px);}
+.pPrices{width:23%; margin-right:2%;}
+.allServicesArea{width:50%; margin-right:2%;}
+.availability{width:23%;}
+.days{font-size:14px;}
+.inOutCall .resp-tabs-list li, .allServices .resp-tabs-list li{font-size:15px;}
+.personalInfo{width:32%;}
+.profileFWidth{margin-bottom:2%;}
+.profilePic .contactAgency{font-size:20px;}
+.modelPName{font-size:30px; line-height:34px;}
+.modelPAge{font-size:16px;}
+.modelPCheck{top:16px; font-size:30px;}
+.pData p{font-size:16px; line-height:24px;}
+.profileData{padding:15px 5px;}
+.profilePV .resp-tabs-container{padding-top:12px;}
+.reviewBlock{padding:20px;}
+.reviewTitle h4{font-size:16px;}
+.reviewText{font-size:16px; padding-top:10px;}
+.reviewReply{margin-top:16px; font-size:16px;}
+/*.profilePic */.agencyContact{padding-top:25px;}
+/*.profilePic */.caInfo ul li i{font-size:76px;}
+/*.profilePic */.caInfo ul li span{top:75px; font-size:26px;}
+/*.profilePic */.followUs ul li:first-child i{font-size:70px; line-height:74px;}
+
+
+
+
+}
+@media only screen and (max-width:1590px){
+.centerwrap{width:1250px;}
+.bodyArea{padding-top:82px;}
+.grid-item{margin:0 0.5% 1%; width:19%;}
+.grid-item2{margin:0 0.5% 1%; width:19%;}
+.genderFilter{width:19.2%;}
+.logo{width:150px;}
+.headerRight nav ul li{font-size:18px; margin-right:20px;}
+.searchID{font-size:28px;}
+.escortArea{font-size:20px; /*width:calc(100% - 20.2%);*/}
+.desktopSearch i{font-size:18px;}
+.searchDrop{width:calc(100% - 20.2%);}
+.changeLo{font-size:20px; line-height:34px; padding:0 20px;}
+.modelCheck{font-size:22px;}
+footer{padding-bottom:32px;}
+.footerLinks li{font-size:17px;}
+.footerText{padding-top:22px;}
+.footerText p{padding-bottom:12px;}
+.newsSub{padding-bottom:22px;}
+
+.eFilters li a{font-size:12px; line-height:23px; padding:0 8px;}
+.totalRecords{font-size:14px;}
+
+.loginArea{padding:10px 24px 24px; width:400px; top:80px;}
+.loginArea:before{right:36px;}
+.loginArea h4{font-size:20px; padding-bottom:15px;}
+.loginBlock{margin-bottom:14px;}
+.loginBlock label{font-size:16px; padding-bottom:2px;}
+.loginBox{height:52px; font-size:16px;}
+.forgotPassword{font-size:16px;}
+.loginSubmit{height:42px; font-size:16px;} 
+.notMemberY{font-size:15px; padding-bottom:6px;}
+.signupNow{font-size:16px; line-height:42px;}
+.twoRSbtn a{font-size:16px; line-height:42px;}
+.recoveremail{font-size:16px;}
+
+.searchDrop{padding:5px 30px 30px;}
+.resp-tabs-list li{font-size:22px; line-height:60px; padding:0 16px; margin-right:10px;}
+.lookingBox{font-size:16px; height:52px; padding-right:60px;}
+.searchOne{height:52px; width:52px; font-size:22px;}
+.basicBox > label{font-size:18px; width:178px;}
+.gender > label{width:52px; height:52px;}
+.pRange label, .aRange label{font-size:18px; padding-bottom:15px;}
+.rangeArea .selectric .label{line-height:24px; padding:0 22px 0 8px;}
+.pRange{margin-bottom:15px;}
+.selectBox label{font-size:18px; width:178px;}
+.selectric .label{line-height:50px;}
+.advancedSearch .resp-tabs-list li{font-size:18px; line-height:42px;}
+.selectBox .selectric-wrapper{width:calc(100% - 178px);}
+.addLangL label{width:178px; font-size:18px;}
+.pleaseSelect{width:calc(100% - 178px);}
+.addLang{line-height:48px;}
+/*.addLangL .selectric-wrapper{width:calc(100% - 75px);}*/
+.resetBtn{height:42px; font-size:16px;}
+.closeBtn{line-height:42px; padding:0 18px;}
+.addLangR li{font-size:15px;}
+.addLangR li a{line-height:34px;}
+.lookingFor{margin-bottom:24px;}
+.irs--flat .irs-from, .irs--flat .irs-to, .irs--flat .irs-single{font-size:16px;}
+.changeLocation{padding:24px 30px 30px; top:48px;}
+.changeBox label{font-size:16px;}
+.selectric .label{font-size:16px;}
+.changeBox{margin-bottom:18px;}
+.changeLocation:before{right:40px;}
+
+/* Blog */
+.blogIcon{font-size:160px; margin-bottom:40px;}
+.blogIcon i{line-height:142px;}
+.blogLinks li{font-size:20px;}
+.blogLinks li a{line-height:44px;}
+.blogRight{padding:40px 40px 0;}
+.featuredI{background-size:180px; width:180px; height:100px;}
+.blogFDetails h2{font-size:28px; padding-bottom:5px;}
+.author{font-size:15px; padding-bottom:14px;}
+.blogFDetails p{font-size:14px; line-height:20px; padding-bottom:14px;}
+.readMore{padding-top:5px;}
+.bCaption{padding:10px 12px;}
+.bCaption h3{font-size:18px;}
+.bCaption p{font-size:13px;}
+.blogArea{padding-bottom:120px;}
+
+/* Blog Inner */
+.blogPost h2{font-size:36px;}
+.blogpAuthor{font-size:16px; padding-bottom:38px;}
+.blogContent p{font-size:16px;}
+.backtoBlog{padding-bottom:38px;}
+
+/* contact */
+.contactIcon{font-size:140px;}
+.contactIcon i{line-height:108px;}
+.contactLeft{width:250px;}
+.contactRight{width:calc(100% - 250px); padding:20px 24px 50px 34px;}
+.contactRight h3{font-size:30px;}
+.contactRight p{font-size:16px; padding-bottom:20px;}
+.contactBlock label{font-size:16px; padding-bottom:3px;}
+.contactB{height:52px;}
+.contactBlock{margin-bottom:18px;}
+.recaptcha{padding-top:27px;}
+.sendMsg{font-size:20px;}
+.contactArea{min-height:560px;}
+.thankMsg{font-size:20px;}
+.browsing{padding-top:50px;}
+
+/* FAQ */
+.faqArea{padding-bottom:160px;}
+.faqIcon{font-size:140px;}
+.faqIcon i{line-height:140px;}
+.faqRight{width:calc(100% - 250px); padding:20px 24px 24px 24px;}
+.faqRight h3{font-size:30px;}
+.faqTab .resp-tabs-list li{font-size:22px; padding:0 30px; margin-right:14px;}
+.faqTab .resp-tabs-container{padding-top:22px;}
+.faqAccordion{padding:14px 0;}
+.faqTitle h4{font-size:16px;}
+.faqDetails p{font-size:16px;}
+
+/* Register */
+.registerArea{padding-bottom:220px;}
+
+/* Register Inner */
+.registerL{width:28%;}
+.registerR{width:calc(100% - 30%); padding:15px 25px 30px;}
+.registerR h3{font-size:30px;}
+.regFR .recaptcha{margin-bottom:30px;}
+.regForm{padding-top:30px;}
+
+/* Thank You*/
+.thankYou{width:28%; height:272px;}
+.thankuR{width:calc(100% - 30%); padding:16px 25px 25px;}
+.thankuR h3{font-size:30px;}
+.thankInner{padding-bottom:150px;}
+.thankuR p{font-size:16px;}
+
+/* Agencies */
+/* Agency Details */
+.topArrows a{font-size:14px; line-height:30px; padding:0 10px;}
+.topArrows a .fa-angle-right{margin-left:3px;}
+.topArrows a .fa-angle-left{margin-right:3px;}
+.agencyDetails{/*margin-top:50px;*/ padding:15px 30px 0 30px; margin-bottom:150px;}
+.agencyLeft .topNVip{top:-15px;}
+.agencyLeft{width:280px;}
+.contactAgency{font-size:16px; line-height:42px;}
+.agencyRight{width:calc(100% - 320px); padding-bottom:30px;}
+.agencyOptions h3{font-size:20px; padding-bottom:18px;}
+.closeContact{width:32px; line-height:32px;}
+
+/* Profile */
+.pPrices{width:49%;}
+.availability{width:49%;}
+.allServicesArea{width:100%; margin-right:0px; margin-top:2%;}
+.inOutCall .resp-tabs-list li, .allServices .resp-tabs-list li{font-size:16px;}
+.personalInfo ul li{font-size:14px;}
+.personalInfo h4{font-size:17px;}
+.profileArea{padding-bottom:70px; /*padding-top:32px;*/}
+.profileTRight .searchSpace .desktopSearch{height:34px;}
+
+.caInfo{top:60px;}
+/*.profilePic*/.caInfo{top:calc(50% + 41px); width:70%;}
+.caILeft{width:34%;}
+
+}
+@media only screen and (max-width:1279px){
+.centerwrap{width:994px;}
+.bodyArea{padding-top:69px;}
+.logo{width:130px; padding-top:5px; padding-bottom:10px;}
+.headerRight nav ul li{font-size:16px; margin-right:17px;}
+.searchID{font-size:26px;}
+.grid-item{width:24%;}
+.grid-item2{width:24%;}
+.genderFilter{width:24.2%;}
+/*.filterLo{padding-top:20px;}*/
+.footerLinks li{padding:0 10px;}
+.footerText{padding-left:50px; padding-right:50px;}
+.fLogo{width:136px;}
+.escortArea{font-size:18px; /*width:calc(100% - 25.2%);*/}
+.desktopSearch i{font-size:16px;}
+.searchDrop{width:100%;}/*calc(100% - 25.2%)*/
+.escortArea i{font-size:20px;}
+.changeLo{font-size:18px; line-height:32px; padding:0 16px;}
+
+.loginArea:before{width:22px; height:22px; top:-10px; right:34px;}
+.loginArea{top:70px;}
+.searchDrop:before{width:22px; height:22px; top:-10px; right:4px;}
+.lookingBox{font-size:15px;}
+.selectBox label, .basicBox > label{font-size:16px; width:158px;}
+.selectBox .selectric-wrapper{width:calc(100% - 158px);}
+.pRange label, .aRange label{font-size:16px; padding-bottom:10px;}
+.irs-from, .irs-to, .irs-single{bottom:-32px;}
+.selectBox{margin-bottom:15px;}
+.lookingFor{margin-bottom:20px;}
+.addLangL label{font-size:16px; width:158px;}
+.pleaseSelect{width:calc(100% - 158px);}
+.addLang{width:52px;}
+.addLangL .oSelect{width:calc(100% - 64px);}
+/*.addLangL .selectric-wrapper{width:calc(100% - 64px);}*/
+.addLangR li{font-size:14px;}
+.changeLocation{padding:20px 24px 24px;}
+.changeBox{margin-bottom:15px;}
+.changeBox label{padding-bottom:4px;}
+.changeLocation:before{width:22px; height:22px; top:-10px; right:34px;}
+
+/* Blog */
+.blogIcon{font-size:130px; margin-bottom:30px;}
+.blogIcon i{line-height:116px;}
+.blogLinks li{font-size:18px;}
+.blogLinks li a{line-height:40px;}
+.blogRight{padding:30px 30px 0;}
+.featuredI{background-size:150px; width:150px; height:82px;}
+.blogFDetails h2{font-size:24px;}
+.author{font-size:14px; padding-bottom:10px;}
+.bpost{width:47%;}
+.pagination{padding-top:10px; padding-bottom:32px;}
+
+/* Blog Inner */
+.blogPost h2{font-size:32px;}
+.blogpAuthor{font-size:15px; padding-bottom:30px;}
+.blogpPic{margin-bottom:28px;}
+
+/* contact */
+.contactIcon{font-size:100px;}
+.contactIcon i{line-height:76px;}
+.contactLeft{width:180px;}
+.contactRight{width:calc(100% - 180px); padding:15px 20px 40px 26px;}
+.contactRight h3{font-size:26px; padding-bottom:6px;}
+.contactRight p{font-size:15px; padding-bottom:15px;}
+.contactArea{min-height:500px; padding-bottom:70px;}
+.contactForm{padding-top:5px;}
+.contactB{height:46px;}
+.contactBlock label{font-size:15px;}
+.contactBlock{margin-bottom:12px;}
+.recaptcha{padding-top:25px; margin-bottom:14px;}
+.sendMsg{font-size:18px; height:40px;}
+.browsing button{height:40px;}
+.thankMsg{font-size:18px;}
+.browsing{padding-top:40px;}
+
+/* FAQ */
+.faqIcon{font-size:100px;}
+.faqIcon i{line-height:100px;}
+.faqRight{width:calc(100% - 180px); padding:15px 20px 20px 20px;}
+.faqRight h3{font-size:26px; padding-bottom:6px;}
+.faqTab .resp-tabs-list li{font-size:18px; padding:0 20px;}
+.faqTab{padding-top:4px;}
+.faqTab .resp-tabs-container{padding-top:16px;}
+.faqArea{padding-bottom:120px;}
+
+/* Register */
+.registerArea{padding-bottom:180px;}
+
+/* Register Inner */
+.registerR h3{font-size:26px; padding-bottom:6px;}
+.regFirst p{font-size:16px;}
+.regForm{padding-top:20px;}
+.registerR{padding:15px 20px 20px;}
+.checkbox{font-size:14px;}
+.registerInner{padding-bottom:70px;}
+.error{font-size:13px;}
+
+/* Thank You*/
+.thankYou{height:215px; padding:0 10px;}
+.thankuR h3{font-size:26px; padding-bottom:6px;}
+.thankuR p{font-size:15px;}
+.thankuR{padding:14px 20px 20px;}
+.continue{padding:0 38px;}
+
+/* Agencies */
+/* Agency Details */
+.topArrows{padding:10px 0;}
+.agencyLeft{width:220px;}
+.agencyRight{width:calc(100% - 250px); padding-bottom:20px;}
+.contactAgency{font-size:13px; line-height:38px;}
+.agencyLogo{margin-bottom:10px;}
+.agencyData h2{font-size:20px;}
+.agencyOptions .grid-item{width:31.33%;}
+.agencyOptions .grid-item2{width:31.33%;}
+.agencyDetails{margin-bottom:120px;}
+.closeContact{top:8px; right:8px;}
+.caInfo ul li{margin:0 5px;}
+.caInfo ul li i{font-size:32px;}
+.followUs ul li:first-child i{font-size:28px; line-height:32px;}
+.caInfo ul li span{top:36px; font-size:16px;}
+.agencyContact{padding-bottom:50px;}
+.followUs{padding-bottom:15px;}
+.caInfo{top:50px;}
+
+/* Profile */
+.profileLeft{width:360px; padding:13px;}
+.profileRight{width:calc(100% - 372px);}
+.profilePic .contactAgency{font-size:18px; line-height:34px;}
+.modelPName{font-size:26px;}
+.modelPAge{font-size:15px;}
+.modelPCheck{font-size:24px;}
+.pData p{font-size:14px; line-height:20px;}
+/*.profilePic */.caInfo{top:calc(50% + 34px);}
+.callRate li{padding-bottom:14px;}
+.allServicesArea{min-height:inherit;}
+.personalInfo ul li{font-size:13px; padding-bottom:5px;}
+.personalInfo{width:31%;}
+.addReview{height:32px; padding:0 14px; font-size:13px; margin-left:15px;}
+.reviewPopup:before{left:131px; top:-9px; width:20px; height:20px;} 
+.reviewPopup{top:65px;}
+.profileArea{padding-bottom:50px;}
+.agencyD p{font-size:14px; line-height:20px;}
+/*.profilePic */.caInfo ul li{margin:0 10px;}
+/*.profilePic */.caInfo ul li i{font-size:56px;}
+/*.profilePic */.caInfo ul li span{top:58px; font-size:22px;}
+/*.profilePic */.agencyContact{padding-bottom:40px;}
+/*.profilePic */.followUs ul li:first-child i{font-size:50px; line-height:54px;}
+.caILeft .modelPName{font-size:24px; line-height:28px;}
+/*.profilePic */.caInfo h4{font-size:18px;}
+/*.profilePic */.followUs{padding:35px;}
+
+
+
+
+}
+@media only screen and (max-width:1023px){
+.centerwrap{width:748px;}
+.bodyArea{padding-top:64px;}
+.headerRight nav ul li > a{padding-bottom:17px;}
+.headerRight nav ul li{font-size:16px; margin-right:10px;}
+.searchAreaD{margin-left:12px;}
+.searchID{font-size:22px;}
+.grid{margin:0 -1%;}
+.grid-item{width:31.33%; margin:0 1% 2%;}
+.grid-item2{width:31.33%; margin:0 1% 2%;}
+.genderFilter{width:31.9%;}
+/*.yourAddress{margin-left:2%; width:calc(100% - 33.9%);}*/
+.logo{width:120px;}
+footer{padding-bottom:26px; padding-top:25px;}
+.newsSub{padding-bottom:18px;}
+.footerLinks{padding-bottom:8px;}
+.footerText{padding:16px 20px 0;}
+.modelName{font-size:16px;}
+
+.twoRSbtn a{padding-bottom:0px;}
+.loginArea{width:350px; padding:10px 16px 16px;}
+.loginArea h4{font-size:18px; padding-bottom:10px;}
+.twoRSbtn a{font-size:14px; line-height:38px;}
+.loginBlock label{font-size:15px;}
+.loginBox{height:46px; font-size:14px;}
+.recoveremail{font-size:15px; line-height:20px;}
+.nyam{font-size:14px;}
+.loginSubmit{height:36px; font-size:15px;}
+.signupNow{height:36px; font-size:15px;}
+.nyMember{padding-top:18px; padding-bottom:5px;}
+.forgotPassword{font-size:15px;}
+.searchDrop{padding:5px 20px 20px; width:100%;}
+.resp-tabs-list li{font-size:18px; line-height:48px; padding:0 14px; margin-right:6px;}
+/*.basicSearch{padding-top:10px;}*/
+.lookingFor{margin-bottom:15px;}
+.lookingBox{font-size:14px; height:46px; padding-left:16px; padding-right:54px;}
+.searchOne{height:46px; width:46px; font-size:18px;}
+.gender > label{width:46px; height:46px; margin-right:8px;}
+.selectBox label, .basicBox > label{font-size:15px; width:138px;}
+.selectBox .selectric-wrapper{width:calc(100% - 138px);}
+.selectric .label{font-size:15px; line-height:44px; padding:0 30px 0 16px;}
+.selectric-items ul, .selectric-items li{font-size:15px;}
+.selectric .button{width:24px;}
+.pRange label, .aRange label{font-size:15px;}
+.irs--flat .irs-from, .irs--flat .irs-to, .irs--flat .irs-single{font-size:14px;}
+.advancedSearch .resp-tabs-list li{font-size:14px; line-height:36px;}
+.advancedSearch{padding-top:10px;}
+.addLangL label{font-size:15px; width:118px;}
+.pleaseSelect{width:calc(100% - 118px);}
+.addLangL .oSelect{width:calc(100% - 60px);}
+/*.addLangL .selectric-wrapper{width:calc(100% - 60px);}*/
+.addLang{line-height:44px;}
+.addLangR li{font-size:13px; margin-right:6px; margin-bottom:6px;}
+.addLangR li a span{padding:0 10px;}
+.resetBtn{height:36px; font-size:14px;}
+.closeBtn{line-height:36px; padding:0 15px; font-size:14px; margin-left:5px;}
+.changeLocation{padding:12px 18px 18px;}
+.rangeArea .selectric .label{font-size:13px; padding:0 18px 0 8px; line-height:20px;}
+.rangeArea .selectric .button{width:18px;}
+.rangeArea .selectric .button:after{width:10px; background-size:10px;}
+.rangeArea .selectBox .selectric-wrapper{width:80px;}
+
+/* Blog */
+.blogIcon{font-size:100px; margin-bottom:25px;}
+.blogIcon i{line-height:88px;}
+.blogLinks li{font-size:16px;}
+.blogLinks li a{line-height:36px;}
+.blogRight{padding:20px 20px 0;}
+.blogFDetails h2{font-size:20px;}
+.author{font-size:13px;}
+.blogFDetails p{font-size:13px; line-height:18px;}
+.readMore{padding-top:0px;}
+.bCaption h3{font-size:16px;}
+.bCaption{padding:8px 12px 6px;}
+.blogArea{padding-bottom:80px;}
+.featuredI{background-size:120px; width:120px; height:68px;}
+
+/* Blog Inner */
+.blogPost h2{font-size:28px;}
+.blogpAuthor{font-size:14px; padding-bottom:20px;}
+.blogpPic{margin-bottom:20px;}
+.blogContent p{font-size:15px; line-height:20px; padding-bottom:20px;}
+.backtoBlog{padding-bottom:30px;}
+
+/* contact */
+.contactIcon{font-size:70px;}
+.contactIcon i{line-height:56px;}
+.contactLeft{width:150px;}
+.contactRight{width:calc(100% - 150px); padding:12px 20px 30px 20px;}
+.contactArea{padding-bottom:50px; min-height:400px;}
+.sendMsg{font-size:16px; height:38px;}
+.browsing button{height:38px; padding-left:30px; padding-right:40px;}
+.browsing button i{font-size:20px;}
+.thankMsg{font-size:16px;}
+
+/* FAQ */
+.faqIcon{font-size:70px;}
+.faqIcon i{line-height:70px;}
+.faqRight{width:calc(100% - 150px); padding:12px 20px 20px 20px;}
+.faqAccordion{padding:10px 0;}
+.faqTitle h4{font-size:15px; padding-left:16px;}
+.faqDetails{padding:6px 48px 0 16px;}
+.faqDetails p{font-size:14px; padding-bottom:15px;}
+.faqArea{padding-bottom:80px;}
+
+/* Register */
+.registerArea{padding-bottom:150px;}
+
+/* Register Inner */
+.registerInner{padding-bottom:50px;}
+.regForm{flex-direction:column;}
+.regFL{width:100%;}
+.regFR{width:100%;}
+.regFR .recaptcha{margin-bottom:20px;}
+
+/* Thank You*/
+.thankYou{height:162px; padding:0 10px;}
+.thankuR p{font-size:14px; padding-bottom:22px;}
+.continue{font-size:13px; line-height:36px; padding:0 28px;}
+.thankInner{padding-bottom:100px;}
+
+/* Agencies */
+.agencyName{font-size:16px;}
+.escortCount{font-size:13px;}
+.country{font-size:13px;}
+
+/* Agency Details */
+.agencyOptions .grid-item{width:48%;}
+.agencyOptions .grid-item2{width:48%;}
+.agencyDetails{padding:10px 20px 0 20px; /*margin-top:20px;*/ margin-bottom:90px;}
+.topArrows a{font-size:13px; line-height:28px;}
+.agencyLeft .topNVip{top:-10px;}
+.agencyD{padding-top:16px;}
+.agencyData{padding-bottom:50px;}
+.agencyRight{padding-top:10px; padding-bottom:10px;}
+.agencyOptions h3{padding-bottom:10px;}
+
+/* Profile */
+.profileLeft{width:280px; padding:10px;}
+.profileRight{width:calc(100% - 290px);}
+.profilePic .contactAgency{font-size:15px;}
+.profilePic .cAgency{padding:10px;}
+.profileTRight .searchSpace .desktopSearch{height:32px;}
+.modelPName{font-size:22px; line-height:26px;}
+.modelPAge{font-size:14px;}
+.modelPCheck{top:16px;}
+.pData p{font-size:13px;}
+.pvPopup{width:32%;}
+.pvPopup:nth-child(3n){margin-right:0px;}
+.profilePV .resp-tabs-container{padding-top:10px;}
+.pTitle{font-size:16px; line-height:50px;}
+.pTitle i{width:50px; line-height:inherit;}
+.callRate li{font-size:14px; padding-bottom:13px;}
+.days{padding-bottom:5px;}
+.pPrices, .availability{min-height:278px;}
+.togglebox{min-height:inherit;}
+.escortSList li{font-size:14px; padding-bottom:10px;}
+.inOutCall .resp-tabs-list li, .allServices .resp-tabs-list li{font-size:14px;}
+.personalInfo h4{font-size:16px; margin-bottom:10px;}
+.personalInfo{width:100%;}
+.pInfo{flex-direction:column;}
+.personalInfo ul li{font-size:14px;}
+.reviewText{font-size:15px;}
+.reviewReply{font-size:15px;}
+.reviewBlock{padding:15px;}
+.profileArea{padding-bottom:30px; /*padding-top:24px;*/}
+.profilePV .resp-tabs-list li{font-size:14px;}
+.reviewPopup{width:100%; padding:16px;}
+.reviewPopup:before{left:125px;}
+.reviewClose{margin-left:8px;}
+.reviewCaptcha{padding-right:15px;}
+/*.profilePic */.caInfo{top:calc(50% + 32px); width:calc(100% - 20px);}
+/*.profilePic */.agencyContact{padding-bottom:50px;}
+
+
+
+
+}
+@media only screen and (max-width:767px){
+.centerwrap{width:96%;}
+.bodyArea{padding-top:48px;}
+header{height:48px;}
+.grid{padding-bottom:20px;}
+.grid .grid-item:first-child{margin-bottom:0px;}
+.grid .grid-item2:first-child{margin-bottom:0px;}
+.escortFilterD{display:none;}
+.headerRight nav{display:none;}
+.logo{position:absolute; left:50%; transform:translateX(-50%); width:102px; padding-top:3px; padding-bottom:0px;}
+.searchID{color:#363636;}
+.searchAreaD{position:absolute; right:0px; top:0px; display:flex; align-items:center; height:48px;}
+.resNavB{position:absolute; left:0px; top:50%; transform:translateY(-50%); cursor:pointer;}
+.resNavB span{background-color:#363636; height:2px; width:18px; margin:6px 0; display:block;}
+.resNavB span:nth-child(2){width:12px;}
+.resNavB span:nth-child(3){width:20px;}
+.resNavB.active span{transform:rotate(-45deg) translate(-6px, 5px); width:20px;}
+.resNavB.active span:nth-child(2){opacity:0;}
+.resNavB.active span:nth-child(3){transform:rotate(45deg) translate(-6px, -6px);}
+.headerRight{height:48px;}
+.genderFilter{display:none;}
+.yourAddress{margin-left:0px; width:100%; display:flex; justify-content:space-between;}
+.escortArea{color:#0f0f0f;}
+.changeLo{float:right; font-size:12px; line-height:27px; font-weight:500; padding:0 5px; margin-left:10px;}
+.searchDrop{top:0px;}
+.searchSpace{display:none;}
+.escortArea i{color:#363636; font-size:18px;}
+.filterLo{padding-top:0px;}
+.topMFilter{display:block;}
+.topMFilterM{width:778px; padding-left:2%;  padding-top:20px; padding-bottom:12px;}
+.topMFilter ul{overflow:auto; -webkit-overflow-scrolling:touch;}
+.topMFilter ul li{font-size:12px; text-align:center; text-transform:uppercase; font-weight:500; margin-right:10px; float:left;}
+.topMFilter ul li:last-child{margin-right:0px;}
+.topMFilter ul li a{color:#df1d42; border:1px solid #df1d42; background-color:#fff; line-height:35px; padding:0 20px; display:block; border-radius:4px;}
+.topMFilter ul li a:hover, .topMFilter ul li a.active{background-color:#df1d42; color:#fff;}
+.footerLinks{display:block; font-size:0px; text-align:center;}
+.footerLinks li{font-size:15px; padding:0 5px; display:inline-block; vertical-align:top;}
+.topNVip{right:5px; min-width:28px; background-size:28px; padding:2px 5px 3px;}
+.topNVip:after{width:28px; background-size:28px; bottom:-10px; height:11px;}
+.new{font-size:12px; line-height:24px;}
+.vip{font-size:12px; line-height:25px;}
+.likeModel{font-size:16px; line-height:18px;}
+.modelName{font-size:14px;}
+.modelAge{font-size:12px;}
+.modelCheck{font-size:18px; top:auto; bottom:10px;}
+.footerText{padding:16px 0px 0;}
+
+.ovHide{overflow:hidden;}
+.mobileMenu{position:absolute; top:48px; left:0; width:100%; z-index:5; display:none;}
+.mobileMenu:before{background-color:rgba(0,0,0,0.5); position:fixed; left:0px; top:0px; width:100%; height:100%; content:''; z-index:-1;}
+.mobileWbg{background-color:#fff; width:219px; padding:21px 10px 30px; height:calc(100vh - 48px); overflow:auto; position:fixed; top:48px; left:0px;}
+.mMenu{padding-bottom:12px;}
+.mMenu li{font-size:18px; line-height:25px; margin-bottom:6px;}
+.mMenu li a{color:#0f0f0f; display:block; position:relative; padding-left:5px;}
+.mMenu li a.active{color:#df1d42;}
+.mMenu li a.active:before{background-color:#df1d42; width:5px; height:25px; position:absolute; left:-6px; top:0px; content:'';}
+.loginAreaM{background-color:#f4f4f4; padding:9px;}
+.loginAreaM label{font-size:14px; font-weight:500; color:#0f0f0f; display:block; padding-bottom:3px;}
+.emailBoxM{background-color:#f7f7f7; border:1px solid #c5c5c5; height:40px; font-family:'Poppins', sans-serif; font-size:14px; padding:0 12px; width:100%; margin-bottom:15px;}
+.btnM{ display:flex; justify-content:space-between; align-items:center;}
+.forgot{font-size:12px; color:#df1d42; cursor:pointer;}
+.forgot:hover{color:#0f0f0f;}
+.submitM{height:28px; border:none; background-color:#df1d42; border-radius:3px; font-size:12px; font-family:'Poppins', sans-serif; font-weight:500; color:#fff; padding:0 10px; cursor:pointer;}
+.notMember{text-align:center; padding-top:26px;}
+.notMember p{font-size:12px; color:#df1d42; padding-bottom:10px;}
+.signupM{line-height:28px; border:none; background-color:#df1d42; border-radius:3px; font-size:12px; font-family:'Poppins', sans-serif; font-weight:500; color:#fff; padding:0 20px; cursor:pointer; text-transform:uppercase; display:inline-block;}
+.arM{display:none; padding-top:10px;}
+.arM h4{font-size:12px; color:#df1d42; padding-bottom:7px; text-align:center;}
+.recoverMPass{background-color:#f4f4f4; padding:9px;}
+.recoverMPass label{font-size:14px; font-weight:500; color:#0f0f0f; display:block; padding-bottom:3px;}
+.recoverMPBtn{line-height:28px; border:none; background-color:#df1d42; border-radius:3px; font-size:12px; font-family:'Poppins', sans-serif; font-weight:500; color:#fff; padding:0 10px; cursor:pointer; text-transform:uppercase; display:block; text-align:center; width:100%;}
+.thanku{display:none; background-color:#f4f4f4; padding:9px;}
+.thanku p{font-size:14px; color:#0f0f0f; line-height:17px; padding-bottom:12px;}
+.loginMPBtn{line-height:28px; border:none; background-color:#df1d42; border-radius:3px; font-size:12px; font-family:'Poppins', sans-serif; font-weight:500; color:#fff; padding:0 10px; cursor:pointer; text-transform:uppercase; display:block; text-align:center; width:100%;}
+.welcomeMBox{background-color:#f4f4f4; padding:10px 10px 18px; text-align:center; display:none;}
+.welcomeMT{font-size:14px; font-weight:500; color:#0f0f0f; text-align:left;}
+.userNameM{font-family:'Prata', serif; font-size:18px; color:#0f0f0f; padding-bottom:16px; text-align:left;}
+.welcomeMBox ul{padding-bottom:18px;}
+.welcomeMBox li{font-size:12px; color:#0f0f0f; font-weight:300; line-height:22px; display:flex; align-items:center;}
+.welcomeMBox li i{font-size:18px; color:#0f0f0f; width:22px; text-align:center; margin-right:6px;}
+.gtDash{line-height:28px; border:none; background-color:#df1d42; border-radius:3px; font-size:12px; font-family:'Poppins', sans-serif; font-weight:500; color:#fff; padding:0 20px; cursor:pointer; text-transform:uppercase; display:inline-block;}
+
+
+.onlyMobile{display:block;}
+.mobileN{display:none;}
+.ServicesSearch{padding-top:10px; }
+.searchDrop{position:absolute; /*top:-79px;*/ left:0px; width:100%; z-index:5; margin-top:20px;}
+.searchDrop:before{width:16px; height:16px; top:-6px;}
+.bodyMBg:after{background-color:rgba(0,0,0,0.5); content:''; position:fixed; left:0px; top:0px; width:100%; height:100%; display:block;}
+.basicL{width:100%; margin-bottom:10px;}
+.basicR{width:100%;}
+.basicSearch{flex-direction:column; padding-top:10px;}
+.lookingFor{margin-bottom:10px;}
+.basicBox{align-items:flex-start; flex-direction:column; margin-bottom:10px;}
+.gender{justify-content:space-between; width:100%;}
+.selectBox{align-items:flex-start; flex-direction:column;}
+.selectBox label, .basicBox > label{padding-bottom:4px; width:100%;}
+.pRange{margin-bottom:10px;}
+.selectBox .selectric-wrapper{width:100%;}
+.selectBox{margin-bottom:10px;}
+.twoBtn{padding-top:5px;}
+.physicalF, .extraF, .languagesF{flex-direction:column; padding:4px 12px 12px; border:1px solid #c3c3c3; border-top:0px; margin-bottom:6px; border-radius:0 0 3px 3px; /*box-shadow:0 0 6px rgba(0,0,0,0.16);*/}
+.languagesF{padding-top:10px;}
+.addLangL{width:100%; flex-direction:column; align-items:flex-start;}
+.pleaseSelect{width:100%;}
+.addLangL label{padding-bottom:4px; width:100%;}
+.addLangR{width:100%;}
+.addLanguage{flex-direction:column;}
+.addLangL{margin-bottom:10px;}
+.changeLocation{top:35px; width:96%; right:2%; border-radius:3px;}
+.changeLocation:before{width:14px; height:14px; right:7px; top:-6px;}
+.changeLoca{flex-direction:column;}
+.changeBox{width:100%; margin-bottom:10px;}
+
+/* Blog */
+.blogLeft{display:none;}
+.blogRight{width:100%;}
+.blogArea{padding-top:5px; padding-bottom:50px;}
+.blogMFilter{display:block;}
+.blogLinks li{margin-bottom:0px;}
+.blogMFilterM{width:466px; padding-left:2%;  padding-top:20px; padding-bottom:12px;}
+.blogMFilter ul{overflow:auto; -webkit-overflow-scrolling:touch;}
+.blogMFilter ul li{font-size:12px; text-align:center; text-transform:uppercase; font-weight:500; margin-right:10px; float:left;}
+.blogMFilter ul li:last-child{margin-right:0px;}
+.blogMFilter ul li a{color:#df1d42; border:1px solid #df1d42; background-color:#fff; line-height:35px; padding:0 20px; display:block; border-radius:4px;}
+.blogMFilter ul li a:hover, .blogMFilter ul li a.active{background-color:#df1d42; color:#fff;}
+
+/* Blog Inner */
+.blogPost h2{font-size:26px;}
+.blogpAuthor{padding-bottom:10px;}
+.blogpPic{margin-bottom:15px;}
+.backtoBlog a{line-height:30px; padding:0 18px;}
+
+/* contact */
+.contactLeft{display:none;}
+.contactRight{width:calc(100% + 4%); margin:0 -2%; border:none; padding:12px 20px 22px 20px;}
+.contactArea{padding-top:0px; min-height:inherit; padding-bottom:10px;}
+.contactFL{width:100%;}
+.contactFR{width:100%;}
+.contactForm{display:block;}
+.recaptcha{padding-top:15px;}
+.thankMsg{font-size:15px;}
+
+/* FAQ */
+.faqRight{width:calc(100% + 4%); margin:0 -2%; border:none; padding:12px 20px 20px 20px;}
+.faqArea{padding-top:10px; padding-bottom:10px;}
+.faqTitle h4{font-size:14px; font-weight:400; padding-right:40px;}
+.faqTab .resp-tabs-list li{font-size:16px; font-weight:400;}
+.faqDetails p{font-size:13px; font-weight:400; line-height:20px;}
+.faqTitle i{right:15px;}
+
+/* Register */
+.registerArea{padding-bottom:90px; padding-top:15px;}
+
+/* Register Inner */
+.registerR h3{font-size:18px;}
+.registerInner{padding-bottom:40px;}
+
+/* Thank You*/
+.thankYou{height:118px; padding:0 5px;}
+.thankuR h3{font-size:18px;}
+.thankuR p{font-size:13px;}
+.thankuR{padding:10px 15px 15px;}
+.thankInner{padding-bottom:70px;}
+
+/* Agencies */
+.agenciesMenu{width:444px;}
+.agencyName{font-size:14px;}
+.agencyInfo{flex-direction:column;}
+.escortCount{font-size:12px;}
+.country{font-size:12px;}
+
+/* Agency Details */
+.agencyDetails{padding:10px 15px 0 15px;}
+.agencyLeft{width:200px;}
+.contactAgency{font-size:12px; line-height:34px;}
+.agencyRight{width:calc(100% - 220px);}
+.agencyRight .topNVip{right:10px;}
+.agencyD p{font-size:14px; line-height:20px;}
+.agencyOptions h3{font-size:18px; padding-bottom:12px;}
+.agencyOptions .grid .grid-item:first-child{margin-bottom:2%;}
+.agencyOptions .grid .grid-item2:first-child{margin-bottom:2%;}
+.agencyData{padding-top:20px;}
+.agencyData h2{font-size:18px;}
+
+/* Profile */
+.profileLeft{width:100%; margin-bottom:2%;}
+.profileRight{width:100%;}
+.pvPopup{width:18.4%;}
+.report{display:block;}
+.profileArea{padding-bottom:20px;}
+.caILeft{display:none;}
+/*.profilePic */.caInfo{position:fixed; top:50%;} 
+/*.profilePic */.followUs{padding-bottom:60px;}
+
+/* Warning Popup */
+.warningLogo{width:150px;}
+.warningPopB{padding:25px 23px;}
+.warningPopB p{font-size:14px; line-height:22px; padding-bottom:16px;}
+.enter{font-size:14px; line-height:36px;}
+.exit{font-size:14px; line-height:36px;}
+
+.fNumber{top:15px;}
+.oSelect .fNumber{top:-9px;}
+.eFilters{padding-right:0px;}
+.profileTRight .topArrows{margin-right:0px;}
+}
+@media only screen and (max-width:567px){
+.grid{margin:0 -1.5%;}
+.grid-item{width:47%; margin:0 1.5% 3%; box-shadow:0 0 7px rgba(0,0,0,0.10);}
+.grid-item2{width:47%; margin:0 1.5% 3%; box-shadow:0 0 7px rgba(0,0,0,0.10);}
+.newsBox{width:calc(100% - 40px);}
+.newsSub h4{line-height:16px; padding-bottom:6px;}
+.escortArea{width:calc(100% - 64px); padding-left:1px;}
+footer{padding-bottom:16px; padding-top:18px;}
+
+/* Blog */
+.blogFeatured{flex-direction:column;}
+.blogFPic{width:100%;}
+.blogFDetails{width:100%; padding-top:14px;}
+.blogRight{padding:15px 15px 0;}
+.featuredI{background-size:140px; width:140px; height:78px;}
+.blogFDetails h2{font-size:22px;}
+.author{font-size:14px;}
+.bCaption h3{font-size:15px; padding-bottom:2px;}
+.bCaption p{font-size:12px;}
+.pagination{padding-bottom:30px;}
+.blogArea{padding-bottom:40px;}
+
+/* Blog Inner */
+.blogPost h2{font-size:22px;}
+.blogpAuthor{font-size:13px;}
+.blogContent p{font-size:14px;}
+.backtoBlog{padding-bottom:20px;}
+
+/* contact */
+.contactRight h3{font-size:22px;}
+.contactRight p{font-size:14px;}
+.sendMsg{height:40px; font-size:14px;}
+
+/* FAQ */
+.faqTab .resp-tabs-list li{font-size:14px; line-height:32px;}
+.faqRight h3{font-size:22px;}
+.faqTab .resp-tabs-container{padding-top:10px;}
+.faqAccordion{margin-bottom:8px;}
+.faqRight{padding:12px 20px 26px 20px;}
+.faqDetails p{font-size:12px; line-height:18px;}
+
+/* Register */
+.registerArea{padding-top:0px; margin:0 -2%; padding-bottom:10px;}
+.regDesktop{display:none;}
+.regMobile{display:block;}
+.registerOptions{flex-direction:column;}
+.registerType{width:100%;}
+.registerType img{width:100%;}
+
+/* Register Inner */
+.registerInner{padding-top:0px; margin:0 -2%; padding-bottom:10px; flex-direction:column;}
+.registerL{width:100%;}
+.registerR{width:100%; border:none; background:transparent; padding:25px 20px 20px;}
+.registerR h3{display:none;}
+.regFR{text-align:center;}
+.selectOption{text-align:left;}
+.regForm .sendMsg{font-size:12px; font-weight:600; width:116px; display:inline-block;}
+
+/* Thank You*/
+.thankInner{padding-top:0px; margin:0 -2%; padding-bottom:10px; flex-direction:column;}
+.thankYou{width:100%; border:none; padding:0px 20% 10px; height:auto;}
+.thankuR{width:100%; border:none; background:transparent; padding:25px 20px 20px;}
+.thankuR h3{font-size:20px;}
+.thankuR p{font-size:14px;}
+.continue{margin-top:15px;}
+
+/* Agencies */
+/* Agency Details */
+.topArrows{display:none;}
+.agencyDetails{margin:0 -2% 10px; flex-direction:column; background-color:transparent; padding:0px;}
+.agencyLeft{width:100%; padding:10px 15px 0 15px; background-color:#fff;}
+.agencyRight{width:100%; padding-top:0px; padding-bottom:0px;}
+.agencyLogo{display:flex; justify-content:center;}
+.agencyData{padding:0px 0px 30px 0px; background-color:#fff;}
+.contactAgencyI{position:fixed; bottom:0px; left:0px; width:100%; z-index:4;}
+/*.profilePic */.caInfo{z-index:5; width:100%; left:0px; bottom:0px; top:auto; transform:none; border-radius:0px; position:fixed;}
+.cAgency{position:fixed; bottom:0px; left:0px; width:100%; padding:10px; z-index:1; background-color:#fff; box-shadow:0 0 7px rgba(0,0,0,0.16); display:flex; justify-content:space-between;}
+.contactAgency{font-size:14px; line-height:40px; width:calc(100% - 108px);}
+.agencyOptions .grid-item{width:46%; margin:0 2% 4%;}
+.agencyOptions .grid-item2{width:46%; margin:0 2% 4%;}
+.agencyOptions .grid{margin:0 -2%;}
+.agencyOptions .grid .grid-item:first-child{margin-bottom:4%;}
+.agencyOptions .grid .grid-item2:first-child{margin-bottom:4%;}
+.aEscortCount{float:left;}
+.aCountry{margin-left:15px; float:left;}
+.agencyD{clear:both;}
+.agencyOptions{padding:20px 15px 0;}
+.caInfo ul li span{font-size:18px; top:40px;}
+.caInfo ul li i{font-size:36px;}
+.followUs ul li:first-child i{font-size:32px; line-height:34px;}
+.caInfo ul li{margin:0 7px;}
+.followUs{padding-bottom:25px;}
+.agencyContact{padding-bottom:70px;}
+.caInfo{bottom:0px; width:100%; left:0px; top:auto;}
+.agencyLeft .topNVip{top:0px; right:10px;}
+.cAgency .leftA, .cAgency .rightA{font-size:18px; font-weight:bold; color:#fff; text-transform:uppercase; background-color:#df1d42; border-radius:3px; display:block; text-align:center; line-height:40px; font-weight:700; border:2px solid #df1d42; cursor:pointer; width:44px;}
+.cAgency .leftA:hover, .cAgency .rightA:hover{background-color:#fff; color:#df1d42;}
+
+/* Profile */
+.profileArea{margin:0 -2%; padding-top:0px;}
+.profileLeft{padding:0px;}
+.profileData{padding:15px 10px;}
+.profilePV{padding:0 10px 5px;}
+.pPrices{width:100%; min-height:inherit; margin-bottom:2%;}
+.availability{width:100%; min-height:inherit; padding-bottom:10px;}
+.modelPCheck{top:14px; right:10px;}
+.pData p{font-size:14px;}
+.forMobile{display:block;}
+.forDesktop{display:none;}
+.allServicesArea{margin-top:0px; margin-bottom:2%;}
+.pInfo ul.resp-tabs-list{justify-content:space-between; border-width:1px;}
+.pInfo .resp-tabs-list li{font-size:16px; line-height:36px; width:50%; margin-right:0px; text-align:center; font-weight:500; padding:0px;}
+.pInfo .resp-tabs-list li.resp-tab-active:after{height:3px;}
+.bstInfo{padding-bottom:5px;}
+.bstInfo ul{width:100%; padding-top:10px;}
+.bstInfo li{font-size:14px; display:flex; font-weight:400; color:#272727; justify-content:space-between; padding-bottom:5px;}
+.pvPopup{width:23.5%;}
+.reviewBlock{padding:15px 0; position:relative; z-index:1;}
+.reviewBlock:nth-child(2n){background-color:transparent;}
+.reviewBlock:nth-child(2n):before{background-color:#f4f4f4; content:''; z-index:-1; left:-15px; top:0px; width:calc(100% + 30px); position:absolute; height:100%;}
+.reviews .pDetails{padding-bottom:0px;}
+.reviews .pagination{padding-bottom:22px;}
+.profilePic .contactAgency{line-height:40px;}
+.contactAgencyB{position:relative; z-index:4;}
+/*.profilePic */.followUs{padding:0 0 50px;}
+
+/* Warning Popup */
+.warningSpace{padding:20px 26px;}
+.warningPopB{padding:20px 18px;}
+.warningLogo{padding-bottom:10px;}
+
+.gender span{font-size:10px; line-height:16px; min-width:16px;}
+.pRange label span, .aRange label span{font-size:10px; line-height:16px; min-width:16px; top:-5px;}
+.fNumber{font-size:10px; line-height:16px; min-width:16px; top:18px;}
+.totalRecords{font-size:13px; padding-top:6px;}
+
+.yourAddress{flex-wrap:wrap;}
+.changeLo{margin-left:auto;}
+.addRight{width:100%; margin-left:0px; padding-top:8px;}
+}
+@media only screen and (max-width:479px){
+.centerwrap{width:94%;}
+.topMFilterM{padding-left:3%;}
+.resp-tabs-list li{font-size:14px; line-height:32px; width:33.33%; text-align:center; margin-right:0px;}
+.resp-tabs-list li.resp-tab-active:after{height:3px; bottom:-1px;}
+.basicSearch, .advancedSearch{padding-top:12px;}
+.lookingBox{height:40px; color:#0f0f0f; font-size:15px; padding-left:12px; padding-right:50px;}
+.searchOne{width:40px; height:40px;}
+.selectBox label, .basicBox > label{font-size:14px;}
+.pRange label, .aRange label{font-size:14px; padding-bottom:8px;}
+.irs--flat .irs-from, .irs--flat .irs-to, .irs--flat .irs-single{font-size:12px;}
+.irs-from, .irs-to, .irs-single{bottom:-26px;}
+.irs--flat{height:30px;}
+.selectric-items ul, .selectric-items li{font-size:14px;}
+.selectric .label{font-size:14px; line-height:38px; padding:0 30px 0 10px; margin-left:0px;}
+.selectBox, .lookingFor, .basicBox, .pRange{margin-bottom:6px;}
+.resetBtn{height:28px; font-size:12px; padding:0 15px;}
+.closeBtn{line-height:28px; font-size:12px; padding:0 10px;}
+.addLangR li a{line-height:28px; font-size:12px; padding-left:10px;}
+.addLangR li a span{margin-left:10px;}
+.addLang{line-height:38px; width:40px;}
+.addLangL .oSelect{width:calc(100% - 48px);}
+/*.addLangL .selectric-wrapper{width:calc(100% - 48px);}*/
+.changeBox label{font-size:14px;}
+
+/* Blog */
+.blogMFilterM{padding-left:3%;}
+.blogRight{padding:12px 12px 0;}
+.blogFDetails h2{font-size:20px;}
+.blogFDetails{padding-top:10px;}
+.author{font-size:13px;}
+.blogPosts{margin:0px; padding-top:10px;}
+.bpost{width:100%; margin:0 0 10px;}
+.bCaption h3{font-size:18px;}
+
+/* Blog Inner */
+.blogPost h2{font-size:20px; line-height:20px;}
+
+/* contact */
+.contactRight{width:calc(100% + 6%); margin:0 -3%; padding:18px 15px 20px 15px;}
+.contactArea{padding-bottom:10px; min-height:300px;}
+.contactBlock label{font-size:14px;}
+.thankMsg{font-size:14px;}
+.browsing button{padding:0 20px;}
+.browsing button i{font-size:18px; margin-right:10px;}
+.contactRight h3{font-size:14px; color:#0F0F0F; font-weight:500; padding-bottom:10px;}
+.contactRight p{font-size:14px; font-weight:400; line-height:20px; color:#0F0F0F;}
+
+/* FAQ */
+.faqRight h3{font-size:14px; color:#0F0F0F; font-weight:500; padding-bottom:10px;}
+.faqRight{padding:18px 15px 20px 15px; width:calc(100% + 6%); margin:0 -3%;}
+.faqTab .resp-tabs-list li{padding:0 8px; margin-right:0px; width:auto;}
+.faqTab ul.resp-tabs-list{justify-content:space-between;}
+.faqTab .resp-tabs-list li:last-child{padding-right:0px;}
+.faqTitle h4{padding-left:12px; line-height:21px;}
+.faqAccordion{padding:6px 0;}
+.faqTab{padding-top:0px;}
+.faqDetails{padding:6px 12px 0 12px;}
+
+/* Register */
+.registerArea{margin:0 -3%;}
+
+/* Register Inner */
+.registerInner{margin:0 -3%;}
+.registerR{padding:25px 15px 20px;}
+.regForm{padding-top:12px;}
+.error{font-weight:400;}
+
+/* Thank You*/
+.thankInner{margin:0 -3%;}
+.thankuR{padding:25px 15px 20px;}
+.thankuR h3{line-height:22px;}
+.thankYou{padding:2px 20% 10px;}
+
+/* Agencies */
+/* Agency Details */
+.agencyDetails{margin:0 -3% 10px;}
+.contactAgency{font-size:13px; line-height:30px; width:calc(100% - 74px);}
+.cAgency .leftA, .cAgency .rightA{width:30px; line-height:30px; font-size:16px;}
+
+/* Profile */
+.profileArea{margin:0 -3%;}
+.pvPopup{width:32%;}
+.efServicesM span{display:none;}
+.escortSList li{width:50%;}
+.pInfo .resp-tabs-list li{font-size:14px; font-weight:700;}
+.reviewSubmit{font-size:12px; height:28px; width:60px;}
+.reviewClose{font-size:12px; height:28px; width:30px;}
+.reviewFinal{flex-direction:column; align-items:flex-end;}
+.reviewCaptcha{padding-right:0px; width:100%; padding-bottom:15px;}
+.reviewText{font-size:14px;}
+.reviewReply{font-size:14px;}
+.reviewReply br{display:none;}
+.profilePic .contactAgency{line-height:30px; font-size:13px;}
+/*.profilePic*/ .caInfo ul li{margin:0 6px;}
+/*.profilePic */.caInfo ul li i{font-size:36px;}
+/*.profilePic */.followUs ul li:first-child i{font-size:32px; line-height:36px;}
+/*.profilePic */.caInfo h4{font-size:14px;}
+/*.profilePic */.caInfo ul li span{top:39px; font-size:18px;}
+/*.profilePic */.followUs{padding:0 0 30px;}
+/*.profilePic */.agencyContact{padding-bottom:60px;}
+
+
+/* Warning Popup */
+.warningSpace{padding:20px 15px;}
+.warningPopB{padding:20px 15px 25px;}
+.warningPopB p{font-size:13px; line-height:20px;}
+.wContent{max-height:250px; overflow:auto;}
+
+}

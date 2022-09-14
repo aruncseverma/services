@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+<ruleset name="PHP_CodeSniffer">
+    <description>The coding standard for our project.</description>
+
+    <!-- Folders/files to sniff for -->
+    <file>app</file>
+    <file>routes</file>
+    <file>config</file>
+    <file>routes</file>
+
+    <!-- folders/files to exclude in checking -->
+    <exclude-pattern>*/migrations/*</exclude-pattern>
+
+    <!-- Command Parameters -->
+    <arg name="colors"/>
+    <arg value="np"/>
+
+    <!-- rule reference PSR-2 https://www.php-fig.org/psr/psr-2/ -->
+    <rule ref="PSR2"/>
+
+    <!-- PEAR -->
+    <rule ref="PEAR.NamingConventions.ValidFunctionName"/>
+
+    <!-- Private properties MUST not be prefixed with an underscore -->
+    <rule ref="PSR2.Classes.PropertyDeclaration.Underscore">
+        <type>error</type>
+    </rule>
+
+    <!-- Private methods MUST not be prefixed with an underscore -->
+    <rule ref="PSR2.Methods.MethodDeclaration.Underscore">
+        <type>error</type>
+    </rule>
+
+    <!-- Generic rules -->
+    <rule ref="Generic.Arrays.DisallowLongArraySyntax"/>
+    <rule ref="Generic.Strings.UnnecessaryStringConcat"/>
+
+    <!-- Check var names, but we don't want leading underscores for private vars -->
+    <rule ref="Squiz.NamingConventions.ValidVariableName" />
+    <rule ref="Squiz.NamingConventions.ValidVariableName.PrivateNoUnderscore">
+        <severity>0</severity>
+    </rule>
+</ruleset>

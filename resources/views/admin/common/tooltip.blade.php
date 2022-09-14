@@ -1,0 +1,1 @@
+ <i class="fa fa-question-circle" aria-hidden="true" data-toggle="tooltip" data-placement="bottom" data-html="true" title="{{ $tooltipText ?? '' }}"></i>

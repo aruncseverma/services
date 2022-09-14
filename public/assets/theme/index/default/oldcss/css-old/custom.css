@@ -1,0 +1,584 @@
+
+.topbar {
+    border-bottom: none;
+}
+.left-sidebar {
+    width: 280px;
+}
+@media (min-width: 1024px) {
+.page-wrapper {
+    margin-left: 280px;
+}
+}
+
+@media (max-width: 767px) {
+    .mini-sidebar .left-sidebar, .mini-sidebar .sidebar-footer {
+        left: -280px;
+    }
+}
+
+.navbar-header {
+    width: 280px;
+}
+.mini-sidebar .sidebar-nav #sidebarnav > li > a {
+    padding: 0 15px;
+}
+
+.navbar-brand i{
+    display: none;
+}
+.mini-sidebar .navbar-brand i {
+    display: block;
+}
+.sidebar-footer {
+    width: 280px;
+}
+.sidebar-footer a {
+    width: 50%;
+}
+
+.sidebar-nav ul li a {
+    padding: 0px 15px;
+    height: 46px;
+    position: relative;
+}
+
+.sidebar-nav > ul > li > a i {
+    position: absolute;
+    line-height: 46px;
+}
+.sidebar-nav .hide-menu {
+    display: table-cell;
+    width: 100%;
+    height: 46px;
+    vertical-align: middle;
+    padding: 0 28px;
+    line-height: 120%;
+    position: relative;
+    width: 280px;
+}
+.sidebar-nav > ul > li > a .label{
+    position: absolute;
+    top: 14px;
+    right: 0;
+    margin: 0;
+
+}
+.topbar .top-navbar .navbar-header {
+    line-height: 68px;
+}
+
+.btn-minimize.collapsed {
+   transform: rotate(180deg);
+   -webkit-transform: rotate(180deg);
+   -ms-transform: rotate(180deg);
+   padding: 0;
+   padding-left: 7px;
+   display: block;
+}
+.card-actions {
+    float: left;
+    height: 36px;
+}
+
+.card-actions a {
+    font-size: 20px;
+    line-height: 36px;
+    padding-left: 0;
+    padding-right: 7px;
+    height: 36px;
+    display: block;
+}
+.card-header {
+    padding: 0.3rem;
+    min-height: 36px;
+    line-height: 160%;
+    cursor: pointer;
+}
+.card-header>span {
+    line-height: 36px;
+    font-size: 18px;
+}
+.card-header button {
+    float: right;
+}
+.card-header button i {
+    display: none;
+}
+.card-header-sub {
+    padding: 3px 10px;
+    background-color: #f2f2f2;
+    font-size: 12px;
+    line-height: 120%;
+    border: 1px solid #eaeaea;
+}
+@media (max-width: 540px) {
+    .card-header button {
+        width: 100%
+    }
+    .topbar .top-navbar .navbar-nav > .nav-item > .nav-link {
+        font-size: 18px!important;
+    }
+
+}
+
+.user-profile .switch-title_m div:nth-child(2) {
+    margin-right: 4px;
+}
+.switch-title {
+    height: 24px;
+}
+.switch-title span {
+    display: block;
+}
+.switch-title span:first-child {
+    float: left;
+    margin-left: 80px;
+}
+.switch-title span:nth-child(2) {
+    float: right;
+    margin-right: 86px;
+}
+@media (min-width: 768px) {
+
+.mini-sidebar .sidebar-nav #sidebarnav > li:hover > a .hide-menu {
+      display: none; }
+
+      .mini-sidebar .sidebar-nav #sidebarnav > li:hover > a {
+          width: 60px;
+          background: #54667a;
+          border-color: #354a5e;
+      }
+      .mini-sidebar .hide-menu, .mini-sidebar .nav-small-cap, .mini-sidebar .sidebar-footer, .mini-sidebar .user-profile .profile-text, .mini-sidebar .user-profile .switch-title {
+            display: none;
+        }
+        .mini-sidebar .bootstrap-switch-mini {
+            width: 35px!important;
+        }
+        .mini-sidebar .bootstrap-switch-off .bootstrap-switch-container {
+            margin-left: -66px!important;
+        }
+        .mini-sidebar .user-profile .switch-title_m i {
+            display: block;
+            font-size: 15px;
+            margin-bottom: 3px;
+        }
+        .mini-sidebar .user-profile .switch-title_m div:nth-child(2) {
+            margin-right: initial;
+            margin-bottom: 6px;
+        }
+        .mini-sidebar .user-profile .switch-title_m span  {
+            display: none;
+        }
+        .mini-sidebar .user-profile {
+            padding-bottom: 40px;
+        }
+}
+
+
+.user-profile .switch-title_m i {
+            display: none;
+        }
+
+.bootstrap-tagsinput .tag {
+    background: #54667a;
+}
+
+.profile-switches {
+    height: 60px;
+}
+
+.profile-switches .onoffswitch {
+    width: 115px;
+    display: inline-block;
+}
+
+.profile-switches .onoffswitch-inner:before {
+  content: "ONLINE";
+  padding-left: 0;
+}
+
+.profile-switches .onoffswitch-inner:after {
+  content: "OFFLINE";
+}
+.profile-switches .onoffswitch-switch {
+    right: 80px;
+    height: 23px;
+}
+
+.mini-sidebar .profile-switches div div:first-child {
+    margin-right: initial;
+}
+.profile-siwtches .bootstrap-siwtch-mini{
+    width: 112px;
+}
+.creditstatcards .card {
+    float: left;
+}
+.creditstatcards .card-header, .creditstatcards .card-body {
+    text-align: center;
+}
+.t-center {
+    text-align: center;
+}
+.creditstatcards .card-header {
+    background: #eaeaea;
+    padding: 0;
+}
+.creditstatcards .card-body {
+    border: 1px solid #eaeaea;
+    border-top: 0;
+}
+
+.card-header button {
+    padding: 3px 0;
+}
+.card-header .currency-drop button {
+    padding: 7px 25px 7px 12px;
+}
+.card-header button span.action-button {
+    display: table-cell;
+    white-space: normal;
+    width: 228px;
+    line-height: 100%;
+    height: 28px;
+    vertical-align: middle;
+    padding: 0 6px;
+}
+@media screen and (max-width: 540px) {
+    .card-header button span {
+    width: 488px;
+}
+}
+
+
+/*-- ==============================================================
+ Small Desktop & above all (1024px)
+ ============================================================== */
+@media (min-width: 1024px) {
+  .footer {
+    left: 280px; } }
+
+@media (max-width: 1023px) {
+  .footer {
+    left: 60px; } }
+
+/*-- ==============================================================
+ Phone and below ipad(767px)
+ ============================================================== */
+@media (max-width: 767px) {
+  /*Header*/
+
+  /*Footer*/
+  .footer {
+    left: 0px; }
+  }
+
+.topbar .top-navbar .navbar-nav > .nav-item > .nav-link {
+    font-size: 24px;
+}
+.topbar .top-navbar .navbar-nav > .nav-item > .nav-link i {
+    margin-right: 6px;
+}
+.table td, .table th {
+    padding: 4px 12px;
+}
+.th-small {
+    width: 80px;
+}
+.th-medium {
+    width: 120px;
+}
+.td-icons {
+    width: 36px;
+    text-align: center;
+}
+
+
+#reviews th:nth-child(5)  {
+    min-width: 300px;
+}
+#reviews th:nth-child(4) {
+    min-width: 116px;
+}
+#reviews th:nth-child(6) {
+    min-width: 61px;
+}
+
+.btn-info,
+.btn-info.disabled {
+  background: #56c039;
+  border: 1px solid #6bd64e; }
+  .btn-info:hover,
+  .btn-info.disabled:hover {
+    background: #6bd64e;
+    opacity: 0.7;
+    border: 1px solid #6bd64e; }
+  .btn-info.active, .btn-info:focus,
+  .btn-info.disabled.active,
+  .btn-info.disabled:focus {
+    background: #028ee1; }
+
+
+.user-profile .profile-img {
+    margin-bottom: 12px;
+}
+.scroll-sidebar {
+    padding-top: 20px;
+}
+
+
+#rates th:last-child, #rates th:nth-child(2), #schedules th:last-child, #schedules th:nth-child(2) {
+    width: 100px;
+    min-width: 100px;
+    text-align: center;
+}
+#rates td:first-child, #schedules td:first-child {
+    vertical-align: middle;
+}
+
+#rates tr:last-child, #schedules tr:last-child, #language_prof tr:last-child {
+    border-bottom: 1px solid #eaeaea;
+}
+#rates td:last-child, #schedules td:last-child {
+    padding-right: 0;
+}
+
+#language_prof tr:last-child {
+    width: 36px;
+}
+
+.inbox-panel .list-group .list-group-item.active, .inbox-panel .list-group .list-group-item:hover {
+    border-left: 3px solid #3b4959;
+}
+.form-group {
+    align-self: flex-end;
+}
+
+.form-drop {
+  color: #3b4959;
+  background-color: transparent;
+  border-color: #ced4da;
+}
+
+.form-drop:hover, .form-drop:focus, .form-drop.focus {
+    background: #f2f7f8;
+    border-color: #ced4da;
+    color: #3b4959;
+}
+
+.bootstrap-select .dropdown-menu li a {
+  display: block;
+  padding: 7px 20px 7px 12px;
+  clear: both;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 1.42857143;
+  color: #3b4959;
+  white-space: nowrap; }
+  .bootstrap-select .dropdown-menu li a:hover, .bootstrap-select .dropdown-menu li a:focus {
+    color: #3b4959;
+    background: #f2f7f8; }
+
+
+.button-save {
+    clear: both;
+    float: right;
+}
+
+.button-save-two {
+    float: right;
+}
+.mem-feat {
+    text-align: center;
+}
+.mem-feat img {
+    width: 100%;
+    max-width: 340px;
+    margin-bottom: 20px;
+}
+.table-mem-feat {
+    font-size: 15px;
+}
+
+.btn-outline-danger {
+  color: #fc2b2b;
+  background-color: transparent;
+  border-color: #fc2b2b; }
+  .btn-outline-danger:hover, .btn-outline-danger:focus, .btn-outline-danger.focus {
+    background: #fc2b2b;
+    border-color: #fc2b2b;
+    color: #ffffff; }
+
+label {
+    padding-left: 12px;
+}
+
+#language-prof .table th:nth-child(2), #language-prof .table td:nth-child(2) {
+    padding-left: 40px;
+}
+
+.comment-row {
+    border: 1px solid #dfdfdf;
+    border-radius: 6px;
+}
+
+.comment-text p {
+    max-height: initial;
+}
+.photos-folders {
+    margin-bottom: 24px;
+}
+.photos-folders i {
+    font-size: 48px;
+    display: block;
+    line-height: 48px;
+}
+@media (max-width: 575px) {
+    .photos-folders i {
+        display: inline-block;
+        margin-right: 12px;
+    }
+}
+.photos-folders div {
+    display: flex;
+    align-items: center;
+}
+.photos-folders .selected i {
+    color: #f62d51;
+}
+.photos-folders-selected {
+    margin-bottom: 24px;
+    color: #f62d51;
+    border-top: 1px solid #f62d51;
+    padding-top: 12px;
+}
+
+.silvergoldval i {
+    font-size: 5em;
+}
+.silvergoldval h4 {
+    margin-top: 24px;
+    margin-bottom: 0;
+}
+@media (max-width: 575px) {
+.silvergoldval div div:nth-child(2) {
+    text-align: center;
+}
+}
+.silvergoldval#silvervalidation i {
+    color: silver;
+}
+.silvergoldval#goldvalidation i {
+    color: gold;
+}
+.card-deck .card {
+    padding: 0;
+
+}
+.card-deck {
+    margin-bottom: 30px;
+}
+.card {
+    background-color: initial;
+}
+.card-body {
+    background: #fff;
+}
+#advertising td, #membership-stat td{
+    vertical-align: middle;
+}
+.profile-name {
+    width: 100%;
+    display: block;
+    margin-bottom: 12px;
+}
+.profile-text button {
+    width: 70%;
+}
+.profile-text .btn-label {
+    float: left
+}
+
+.creditpackages td {
+    font-size: 36px;
+}
+.creditpackages td .mini {
+    font-size: 18px;
+}
+#proceedpayment i {
+    color: #721c24;
+}
+
+#proceedpayment .alert td {
+    border: 0;
+}
+#proceedpayment thead {
+    border-bottom: 1px solid #721c24;
+}
+.left-image-holder {
+    align-self: center;
+    text-align: center;
+}
+@media screen and (min-width:1200px) {
+.card-columns {
+    column-count: 5;
+}
+}
+@media screen and (max-width:1199px) {
+.card-columns {
+    column-count: 4;
+}
+}
+@media screen and (max-width:976px) {
+.card-columns {
+    column-count: 3;
+}
+}
+@media screen and (max-width:676px) {
+.card-columns {
+    column-count: 2;
+}
+.model-thumbs .icons button {
+    width: 24px;
+    height: 24px;
+    padding: 0;
+}
+
+}
+.card-title i {
+    float: right;
+}
+.model-thumbs .card-text button {
+    padding: 0 4px;
+    font-size: 0.5em;
+    width: 48%;
+    min-height: 36px;
+}
+.model-thumbs .card-text {
+    text-align: center;
+}
+.model-thumbs .icons {
+    text-align: right;
+}
+@media screen and (min-width:677px) {
+.model-thumbs .icons button {
+    width: 36px;
+    height: 36px;
+    padding: 0;
+}
+}
+.model-thumbs .card-body {
+    position: relative;
+}
+.model-thumbs .card-body .flag-icon {
+    position: absolute;
+    top: -24px;
+    right: 24px;
+}
+.model-thumbs .card-body {
+    padding: 12px;
+}
+.model-thumbs .card-body .add-escort {
+    display: block;
+}
