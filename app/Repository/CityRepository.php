@@ -180,4 +180,17 @@ class CityRepository extends Repository
             ->where('name', $city)
             ->first();
     }
+
+    /**
+     * fetches city details by city name
+     *
+     * @param id $city
+     * @return City|null
+     */
+    public function getCityById($city) : ?City
+    {
+        return $this->getBuilder()
+            ->where('id', $city)
+            ->first();
+    }
 }

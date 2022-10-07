@@ -38,8 +38,6 @@ Route::get('/storage-link', function() {
 });
 
 
-
-
 // admin routes
 Route::group(['prefix' => '/admin', 'namespace' => 'Admin'], function ($route) {;;;;;;;;;;;;;;;;;;;;;;;;;
     // auth
@@ -669,6 +667,11 @@ Route::group(['prefix' => '/', 'namespace' => 'Index', 'middleware' => 'switch.l
         $route->post('/add-report', ['uses' => 'AddReportController@handle', 'as' => 'index.profile.add_report']);
         $route->get('/{username}', ['uses' => 'RenderProfileController@view', 'as' => 'index.profile']);
     });
+
+    //Route::get('ajax-pagination', 'Profile\RenderProfileController@ajaxPagination')->name('ajax.pagination');
+
+    Route::get('/ajax-pagination', ['uses' => 'Profile\RenderProfileController@ajaxPagination', 'as' => 'ajax.pagination']);
+
     // end profile
 
     // $route->group(['prefix' => '/auth', 'namespace' => 'Auth'], function ($route) {
@@ -790,9 +793,11 @@ Route::group(['prefix' => '/', 'namespace' => 'Index', 'middleware' => 'switch.l
     $route->group(['prefix' => '/', 'namespace' => 'Home'], function ($route) {
         $route->get('/', ['uses' => 'IndexController@view', 'as' => 'index.home']);
         $route->get('/filter', ['uses' => 'IndexController@view', 'as' => 'index.filter']);
+        $route->get('/locationdata', ['uses' => 'IndexController@getLocationNameBYId', 'as' => 'index.locationdata']);
         $route->get('/location/{country}', ['uses' => 'IndexController@view', 'as' => 'index.country']);
         $route->get('/location/{country}/{state}', ['uses' => 'IndexController@view', 'as' => 'index.state']);
         $route->get('/location/{country}/{state}/{city}', ['uses' => 'IndexController@view', 'as' => 'index.city']);
+        $route->get('/filter-option', ['uses' => 'IndexController@getFilterOptions', 'as' => 'index.filteroption']);
 
         // ajax locations' routes
         $route->get('/escorts', ['uses' => 'EscortController@findEscort', 'as' => 'index.escort.list']);
@@ -816,14 +821,14 @@ Route::group(['prefix' => '/', 'namespace' => 'Index', 'middleware' => 'switch.l
         $route->post('/remove-favorite', ['uses' => 'RemoveFavoriteController@handle', 'as' => 'index.profile.remove_favorite']);
         $route->post('/add-booking', ['uses' => 'AddBookingController@handle', 'as' => 'index.profile.add_booking'])->middleware('handle.ajax');
         $route->post('/add-report', ['uses' => 'AddReportController@handle', 'as' => 'index.profile.add_report']);
-        $route->get('/{id}', ['uses' => 'RenderProfileController@view', 'as' => 'index.profile']);
+        
         
         // follower
         $route->post('/follow', ['uses' => 'FollowController@handle', 'as' => 'index.profile.follow']);
         $route->post('/unfollow', ['uses' => 'UnfollowController@handle', 'as' => 'index.profile.unfollow']);
     });
     // end profile
-
+    $route->get('/profile/{id}', ['uses' => 'RenderProfileController@view', 'as' => 'index.profile']);
     // $route->group(['prefix' => '/auth', 'namespace' => 'Auth'], function ($route) {
     //     $route->post('/login', ['uses' => 'LoginController@handle', 'as' => 'index.auth.login']);
     //     $route->get('/logout', ['uses' => 'LogoutController@handle', 'as' => 'index.auth.logout']);

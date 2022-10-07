@@ -10,6 +10,7 @@ namespace App\Http\Controllers\Index\Profile;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Support\Collection;
+use Illuminate\Http\Request;
 use App\Models\UserLocation;
 use App\Repository\RateDurationRepository;
 use App\Repository\UserViewRepository;
@@ -22,7 +23,10 @@ use App\Models\UserGroup;
 use App\Models\User;
 use App\Repository\UserFollowerRepository;
 use App\Repository\FavoriteRepository;
+//use App\Repository\EscortRepository;
 use Carbon\Carbon;
+use Illuminate\Pagination\LengthAwarePaginator;
+use DB;
 
 class RenderProfileController extends Controller
 {
@@ -35,14 +39,22 @@ class RenderProfileController extends Controller
     public function view($username)
     {
         $auth = $this->getAuthUser();
-
+        
         $user = $this->repository->findUserByUsername($username);
         if (! $user) {
             abort(404);
         }
-
         
-
+        $raviewdata = DB::table('user_reviews')
+        ->leftJoin('users', 'user_reviews.user_id', '=', 'users.id')
+        ->where('user_reviews.object_id', $user->id)
+        ->where('user_reviews.is_approved', '1')
+        ->select('user_reviews.*', 'users.name as username')
+        ->paginate(10);
+        //$raviewdata->appends('profile/'.$user->id);
+        //dd($raviewdata->lastPage());
+        $user->reviews = $raviewdata;
+        //
         // eye color
         $eyeColorOptions = $this->getEyeColorOptions();
         $user->eyeColor = '';
@@ -119,8 +131,25 @@ class RenderProfileController extends Controller
         if (!empty($user->mainLocation->country->name)) {
             $homeCity[] = $user->mainLocation->country->name;
         }
-        $user->homeCity = !empty($homeCity) ? implode(', ', $homeCity) : '';
+        $user->homeCity = !empty($homeCity) ? implode(',', $homeCity) : '';
+        
+        if (!empty($user->mainLocation->country->name)) {
+            $user->country = $user->mainLocation->country->name;
+        } else {
+            $user->country = '';
+        }
 
+        if (!empty($user->mainLocation->state->name)) {
+            $user->state = $user->mainLocation->state->name;
+        } else {
+            $user->state = '';
+        }
+
+        if (!empty($user->mainLocation->city->name)) {
+            $user->city = $user->mainLocation->city->name;
+        } else {
+            $user->city = '';
+        }
 
         $this->setTitle(__('Profile'));
 
@@ -139,8 +168,22 @@ class RenderProfileController extends Controller
             'destinations' => $this->getUserDestinations($user), // biography - destinations
             'shortAboutMe' => $this->getUserShortDescription($user), // about me - short description
             'isFollowed' => $this->isFollowed($user, $auth),
-            'isFavorited' => $this->isFavorited($user, $auth),
+            'isFavorited' => $this->isFavorited($user, $auth),           
         ]);
+    }
+
+    /**
+     * get gender options
+     *
+     * @return array
+     */
+    protected function getGenderOptions()
+    {
+        return [
+            'M' => 'Male',
+            'F' => 'Female',
+            'B' => 'Bysexual'
+        ];
     }
 
     /**
@@ -487,5 +530,33 @@ class RenderProfileController extends Controller
             return false;
         }
         return true;
+    }
+
+    public function ajaxPagination(Request $request)
+    {
+       
+        $username = $request->username;
+        $page = $request->page;
+        $auth = $this->getAuthUser();
+        $user = $this->repository->findUserByUsername($username);
+        if (! $user) {
+            abort(404);
+        }
+        
+        $raviewdata = DB::table('user_reviews')
+        ->leftJoin('users', 'user_reviews.user_id', '=', 'users.id')
+        ->where('user_reviews.object_id', $user->id)
+        ->where('user_reviews.is_approved', '1')
+        ->select('user_reviews.*', 'users.name as username')
+        ->paginate(10);
+
+        
+
+   
+        if ($request->ajax()) {
+            return view('Index::profile.presult', compact('raviewdata'));
+        }
+  
+        //return view('ajaxPagination',compact('data'));
     }
 }

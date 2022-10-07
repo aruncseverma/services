@@ -76,7 +76,6 @@ $(document).ready(function(){
 		$('body').removeClass('bodyloginBg');
 		$('body').removeClass('bodyBg');
 	});
-
 	$('.changeLocation .closeBtn').on('click', function(){
 		$('.changeLocation').hide();
 		$('body').removeClass("bodychangeBg");
@@ -232,7 +231,7 @@ $(document).ready(function(){
 		}
 	});
 
-	    $('#profilePV').easyResponsiveTabs({
+	$('#profilePV').easyResponsiveTabs({
             type: 'default', //Types: default, vertical, accordion
             width: 'auto', //auto or any width like 600px
             fit: true, // 100% fit in a container
@@ -289,7 +288,6 @@ $(document).ready(function(){
     $(document).ready(function() {
         var $filterUrl = '{{route("index.filter")}}';
         var $locationDataUrl = '{{route("index.locationdata")}}';
-        var $filterOptionUrl = '{{route("index.filteroption")}}';
         var $filterParams = {};
         var $lastclickeditem = '';
         window.location.search
@@ -300,6 +298,124 @@ $(document).ready(function(){
         var $filterContainer = $('.grid');
         var $filterNav = $('#filter-nav');
         var $links = $('.filter-ajax');
+        
+        function fnResetFilter() {
+
+            // reset search box
+            $('#filter-search-text').val('');
+            // remove active in gender area
+            $('.gender-area a').removeClass('active');
+            // remove active in sidebar
+            $('#filter-nav a').removeClass('active');
+
+            // Basic
+            $('#filter_basic').find('select').val('').selectric('refresh');
+            // Physical
+            $('#filter_physical').find('select').val('').selectric('refresh');
+            // Languages
+            $('#filter_languages').find(':checkbox').prop('checked', false);
+            // Escort Services
+            $('#filter_escort_services').find(':checkbox').prop('checked', false);
+            // Erotic Services
+            $('#filter_erotic_services').find(':checkbox').prop('checked', false);
+            // Extra Services
+            $('#filter_extra_services').find(':checkbox').prop('checked', false);
+            // Fetish Services
+            $('#filter_fetish_services').find(':checkbox').prop('checked', false);
+        }
+
+        function fnAutoSetValue() {
+            // gender
+            if (typeof $filterParams['gender'] != 'undefined' && $filterParams['gender'] != '') {
+
+                // basic > gender
+                $basicGender = $('#filter_basic').find('#gender');
+                if ($basicGender.val() != $filterParams['gender']) {
+                    console.log('basic > gender > value : ' + $filterParams['gender']);
+                    $basicGender.val($filterParams['gender']).selectric('refresh');
+                }
+
+                // gender area
+                if ($('.gender-area a.active').data('filter-data') != 'gender=' + $filterParams['gender']) {
+                    console.log('gender area > value : ' + $filterParams['gender']);
+                    $('.gender-area a').removeClass('active');
+                    $('.gender-area a[data-filter-data="gender=' + $filterParams['gender'] + '"]').addClass('active');
+                }
+            }
+
+            // age
+            if (typeof $filterParams['age'] != 'undefined' &&  $filterParams['age'] != '') {
+
+                // basic > gender
+                $basicAge = $('#filter_basic').find('#age');
+                if ($basicAge.val() != $filterParams['age']) {
+                    console.log('basic > age > value : ' + $filterParams['age']);
+                    $basicAge.val($filterParams['age']).selectric('refresh');
+                }
+
+                // main filter > age
+                if ($('#filtermain_age li.active a').data('filter-data') != 'age=' + $filterParams['age']) {
+                    console.log('main filter > age : ' + $filterParams['age']);
+                    $('#filtermain_age li').removeClass('active');
+                    $('#filtermain_age li a[data-filter-data="age=' + $filterParams['age'] + '"]').closest('li').addClass('active');
+                }
+            }
+
+            // ethnicity
+            if (typeof $filterParams['age'] != 'undefined' &&  $filterParams['age'] != '') {
+
+                // basic > ethnicity
+                $basicEthnicity = $('#filter_basic').find('#ethnicity');
+                if ($basicEthnicity.val() != $filterParams['ethnicity']) {
+                    console.log('basic > ethnicity > value : ' + $filterParams['ethnicity']);
+                    $basicEthnicity.val($filterParams['ethnicity']).selectric('refresh');
+                }
+
+                // main filter > ethnicity
+                if ($('#filtermain_ethnicity li.active a').data('filter-data') != 'ethnicity=' + $filterParams['ethnicity']) {
+                    console.log('main filter > ethnicity : ' + $filterParams['ethnicity']);
+                    $('#filtermain_ethnicity li').removeClass('active');
+                    $('#filtermain_ethnicity li a[data-filter-data="ethnicity=' + $filterParams['ethnicity'] + '"]').closest('li').addClass('active');
+                }
+            }
+
+            // video
+            if (typeof $filterParams['with_video'] != 'undefined' && $filterParams['with_video'] != '') {
+
+                // basic > with_video
+                $basicVideo = $('#filter_basic').find('#with_video');
+                if ($basicVideo.val() != $filterParams['with_video']) {
+                    console.log('basic > with_video > value : ' + $filterParams['with_video']);
+                    $basicVideo.val($filterParams['with_video']).selectric('refresh');
+                }
+
+                // main filter > with_video
+                if ($('#filtermain_video li.active a').data('filter-data') != 'with_video=' + $filterParams['with_video']) {
+                    console.log('main filter > with_video : ' + $filterParams['with_video']);
+                    $('#filtermain_video li').removeClass('active');
+                    $('#filtermain_video li a[data-filter-data="with_video=' + $filterParams['with_video'] + '"]').closest('li').addClass('active');
+                }
+            }
+
+            // height
+            if (typeof $filterParams['height'] != 'undefined' && $filterParams['height'] != '') {
+
+                // basic > height
+                $basicVideo = $('#filter_physical').find('#height');
+                if ($basicVideo.val() != $filterParams['height']) {
+                    console.log('basic > height > value : ' + $filterParams['height']);
+                    $basicVideo.val($filterParams['height']).selectric('refresh');
+                }
+
+                // main filter > height
+                if ($('#filtermain_height li.active a').data('filter-data') != 'height=' + $filterParams['height']) {
+                    console.log('main filter > height : ' + $filterParams['height']);
+                    $('#filtermain_height li').removeClass('active');
+                    $('#filtermain_height li a[data-filter-data="height=' + $filterParams['height'] + '"]').closest('li').addClass('active');
+                }
+            }
+
+        }
 
         var $grid = $('.masonrow');
         // minus 4px to escort photo because container has padding
@@ -311,26 +427,14 @@ $(document).ready(function(){
                 $filterParams = {}; // reset
             }
 
-            if($filterParams['continent_id']!=undefined || $filterParams['country_id']!=undefined || $filterParams['state_id']!=undefined || $filterParams['city_id'] != undefined){
-                fnAjax({
-                    url: $locationDataUrl,
-                    data: $filterParams,
-                    success: function(data) {
-                        $('.escortArea span').html('');
-                        $('.escortArea span').html(data);
-                    }
-                }); 
-            }
             fnAjax({
-                url: $filterOptionUrl,
+                url: $locationDataUrl,
                 data: $filterParams,
                 success: function(data) {
-                    $('.presearchtab').remove();
-                    $( "<div class='resp-tabs-container hor_1 presearchtab'></div>" ).insertAfter( ".resp-tabs-list" );
-                    //$('.resp-tabs-container').addClass('presearchtab');
-                    $('.resp-tabs-container').append($(data.html));                    
+                    $('.escortArea span').html('');
+                    $('.escortArea span').html(data);
                 }
-            });
+            });            
 
             fnAjax({
                 url: $filterUrl,
@@ -338,22 +442,21 @@ $(document).ready(function(){
                 success: function(data) {
                     if (isAll) {
                         var $filterFullUrl = $('#all_escort').attr('href');
-                        //fnResetFilter();
+                        fnResetFilter();
                         $('#all_escort').addClass('active');
                     } else {
                         var $filterFullUrl = $filterUrl + '?' + $.param($filterParams);
                         $filterFullUrl = decodeURIComponent($filterFullUrl);
                         $('#all_escort').removeClass('active');
-                        //fnAutoSetValue();
+                        fnAutoSetValue();
                     }
                     window.history.pushState("", "", $filterFullUrl);
-                    
                     //console.log(data);
                     if (typeof data.status !== 'undefined') {
                         if (data.status == 1) {
                             var $content = $(data.html);
                             var $images = $content.find('img');
-                            $('.totalRecords').html(data.total+' available records');
+
                             if($filterParams['gender']=='M'){
                                 $('.escortG span').text('');                            
                                 $('.gm').text(data.total);
@@ -372,6 +475,102 @@ $(document).ready(function(){
                             if($filterParams['gender']=='C'){  
                                 $('.escortG span').text('');                               
                                 $('.gh').text(data.total);
+                            }
+
+                            if($lastclickeditem == 'price' && $filterParams[$lastclickeditem] !='' && $filterParams[$lastclickeditem] !== 'undefined'){                                
+                                $('.pr_range').text(data.total);                                
+                            }
+
+                            if($lastclickeditem == 'age' && $filterParams[$lastclickeditem] !='' && $filterParams[$lastclickeditem] !== 'undefined'){                               
+                                $('.ag_range').text(data.total);                               
+                            }
+
+                            if($lastclickeditem=='ethnicity' && $filterParams[$lastclickeditem] !='' && $filterParams[$lastclickeditem] !== 'undefined'){
+                                $('.ethi_total').text(data.total);
+                            }
+
+                            if($lastclickeditem=='service_type' && $filterParams[$lastclickeditem] !='' && $filterParams[$lastclickeditem] !== 'undefined'){
+                                $('.service_total').text(data.total);
+                            }
+
+                            if($lastclickeditem=='verification' && $filterParams[$lastclickeditem] !='' && $filterParams[$lastclickeditem] !== 'undefined'){
+                                $('.verification_total').text(data.total);
+                            }
+
+                            if($lastclickeditem == 'height' && $filterParams[$lastclickeditem] !='' && $filterParams[$lastclickeditem] !== 'undefined'){                                
+                                $('.heightTotal').text(data.total);                                
+                            }
+
+                            if($lastclickeditem == 'hair_color_id' && $filterParams[$lastclickeditem] !='' && $filterParams[$lastclickeditem] !== 'undefined'){                                
+                                $('.hairColorTotal').text(data.total);                                
+                            }
+
+                            if($lastclickeditem == 'cup_size' && $filterParams[$lastclickeditem] !='' && $filterParams[$lastclickeditem] !== 'undefined'){                                
+                                $('.cupSizeTotal').text(data.total);                                
+                            }
+
+                            if($lastclickeditem == 'body_type' && $filterParams[$lastclickeditem] !='' && $filterParams[$lastclickeditem] !== 'undefined'){                                
+                                $('.buildTotal').text(data.total);                                
+                            }
+
+                            if($lastclickeditem == 'hair_length' && $filterParams[$lastclickeditem] !='' && $filterParams[$lastclickeditem] !== 'undefined'){                                
+                                $('.hairLengthTotal').text(data.total);                                
+                            }
+
+                            if($lastclickeditem == 'eye_color_id' && $filterParams[$lastclickeditem] !='' && $filterParams[$lastclickeditem] !== 'undefined'){                                
+                                $('.eyeColorTotal').text(data.total);                                
+                            }
+
+                            if($lastclickeditem == 'public_hair' && $filterParams[$lastclickeditem] !='' && $filterParams[$lastclickeditem] !== 'undefined'){                                
+                                $('.publicHairTotal').text(data.total);                                
+                            }
+                            console.log($lastclickeditem);
+                            if($lastclickeditem == 'escort_type' && $filterParams[$lastclickeditem] !='' && $filterParams[$lastclickeditem] !== 'undefined'){                                
+                                $('.escortTypeTotal').text(data.total);                                
+                            }
+
+                            if($lastclickeditem == 'origin' && $filterParams[$lastclickeditem] !='' && $filterParams[$lastclickeditem] !== 'undefined'){                                
+                                $('.originTotal').text(data.total);                                
+                            }
+
+                            if($lastclickeditem == 'travel' && $filterParams[$lastclickeditem] !='' && $filterParams[$lastclickeditem] !== 'undefined'){                                
+                                $('.travelTotal').text(data.total);                                
+                            }
+
+                            if($lastclickeditem == 'smoke' && $filterParams[$lastclickeditem] !='' && $filterParams[$lastclickeditem] !== 'undefined'){                                
+                                $('.smokeTotal').text(data.total);                                
+                            }
+
+                            if($lastclickeditem == 'drink' && $filterParams[$lastclickeditem] !='' && $filterParams[$lastclickeditem] !== 'undefined'){                                
+                                $('.drinkTotal').text(data.total);                                
+                            }
+
+                            if($lastclickeditem == 'with_video' && $filterParams[$lastclickeditem] !='' && $filterParams[$lastclickeditem] !== 'undefined'){                                
+                                $('.videoTotal').text(data.total);                                
+                            }
+
+                            if($lastclickeditem == 'with_review' && $filterParams[$lastclickeditem] !='' && $filterParams[$lastclickeditem] !== 'undefined'){                                
+                                $('.reviewTotal').text(data.total);                                
+                            }
+                            
+                            if($lastclickeditem == 'lang_ids' && $filterParams[$lastclickeditem] !='' && $filterParams[$lastclickeditem] !== 'undefined'){                                
+                                $('.languageTotal').text(data.total);                                
+                            }
+
+                            if($lastclickeditem == 'escort_service_ids' && $filterParams[$lastclickeditem] !='' && $filterParams[$lastclickeditem] !== 'undefined'){                                
+                                $('.escortServiceTotal').text(data.total);                                
+                            }
+
+                            if($lastclickeditem == 'erotic_service_ids' && $filterParams[$lastclickeditem] !='' && $filterParams[$lastclickeditem] !== 'undefined'){                                
+                                $('.eroticServiceTotal').text(data.total);                                
+                            }
+
+                            if($lastclickeditem == 'extra_service_ids' && $filterParams[$lastclickeditem] !='' && $filterParams[$lastclickeditem] !== 'undefined'){                                
+                                $('.extraServiceTotal').text(data.total);                                
+                            }
+
+                            if($lastclickeditem == 'fetish_service_ids' && $filterParams[$lastclickeditem] !='' && $filterParams[$lastclickeditem] !== 'undefined'){                                
+                                $('.fetishTotal').text(data.total);                                
                             }
 
                             // remove all items

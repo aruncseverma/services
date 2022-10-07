@@ -8,14 +8,13 @@
 @endsection
 
 @section('main.content')
-
 <div class="centerwrap clear">
     	<div class="profileTRight">
         	<div class="topArrows">
                 <a href="#"><i class="fas fa-angle-left"></i> Previous Escort</a>
                 <a href="#">Next Escort <i class="fas fa-angle-right"></i></a>
             </div>
-            <div class="searchSpace"><div class="searchID desktopSearch"><i class="fas fa-search"></i></div></div>
+            <!--<div class="searchSpace"><div class="searchID desktopSearch"><i class="fas fa-search"></i></div></div>-->
         </div>
     	
         <div class="profileArea clear">
@@ -42,12 +41,12 @@
                             <div class="caILeft">
 	                            <div class="pPic">
                                     @if ($photos['public'])
-                                    <img src="{{ route('common.photo', ['photo' => $photos['public'], 'path'=> $photos['public']->path]) }}">
+                                        <img src="{{ route('common.photo', ['photo' => $photos['public'], 'path'=> $photos['public']->path]) }}">
                                     @else
                                         <img src="{{ asset('assets/theme/index/default/images/index/user_image.png') }}" alt="user_image" title="user_image">
                                     @endif</div>
                                 <div class="modelPName"><a href="#">{{ $user->name ?? '' }}</a></div>
-                    			<div class="modelPAge">Age: <span>23</span></div>
+                    			<div class="modelPAge">Age: <span>{{ $user->age ?? '' }}</span></div>
                             </div>
                             <div class="agencyContact">
                                 <h4>CONTACT US</h4>
@@ -72,7 +71,7 @@
                 </div>
                 <div class="profileData">
                 	<div class="modelPName"><a href="#">{{ $user->name ?? '' }}</a></div>
-                    <div class="modelPAge">Age: <span>23</span></div>
+                    <div class="modelPAge">Age: <span>{{ $user->age ?? '' }}</span></div>
                     <div class="modelPCheck goldCheck"><i class="far fa-check-square"></i></div>
                     <div class="pData">
                     	<p data-expandlink="Read More" data-collapselink="Less" class="vText">{{ $user->description->content ?? '' }}</p>
@@ -287,7 +286,8 @@
                             <div class="personalInfo">
                                 <h4>Biography</h4>
                                 <ul>
-                                    <li>Home City<span>{{ $user->homeCity  ?? '' }}</span></li>
+                                    <li>Home City<span style="text-align:right;">
+                                    {!! ($user->city)?$user->city.'<br />' : '' !!}{!! ($user->state)?$user->state.', <br />' : '' !!}{{ $user->country  ?? '' }}</span></li>
                                     <li>Drinker<span>Yes</span></li>
                                     <li>Length<span>{{ $user->hairLength ?? '--' }}</span></li>
                                     <li>Orientation<span>{{ $user->orientation ?? '--' }}</span></li>
@@ -335,7 +335,7 @@
                                 <div class="resp-tabs-container personalI">
                                 	<div class="bstInfo">
                                         <ul>
-                                            <li>Home City<span>{{ $user->homeCity  ?? '' }}</span></li>
+                                            <li>Home City<span style="text-align:right;">{!! ($user->city)?$user->city.'<br />' : '' !!}{!! ($user->state)?$user->state.', <br />' : '' !!}{{ $user->country  ?? '' }} </span></li>
                                             <li>Drinker<span>Yes</span></li>
                                             <li>Length<span>{{ $user->hairLength ?? '--' }}</span></li>
                                             <li>Orientation<span>{{ $user->orientation ?? '--' }}</span></li>
@@ -397,43 +397,46 @@
                                     <div class="notMem">Not a member yet?<a href="#">SIGNUP NOW</a></div>
                                 </div>-->
                                 <div class="addReviewB">
+                                <form class="default_form es es-validation es-ajax" action="{{ route('index.profile.add_review') }}" method="POST" id="review_form">
+                                    @csrf
+                                    <input type="hidden" name="id" value="{{ $user->username ?? '' }}">
                                 	<div class="reviewRight">ADD REVIEW</div>
                                     <div class="reviewBox">
                                         <label>Add Rating</label>
                                         <div class="dropdown">
-                                            <div class="dropdownBox">
+                                            <div class="dropdownBox" data-rating="">
                                             	Please select
                                             </div>
                                             <ul>
-                                                <li class="clear">
+                                                <li class="clear" data-value="1">
                                                 	<img src="{{ asset('assets/theme/index/default/images/index/starFull.png') }}" alt="">
                                                     <img src="{{ asset('assets/theme/index/default/images/index/starHalf.png') }}" alt="">
                                                     <img src="{{ asset('assets/theme/index/default/images/index/starHalf.png') }}" alt="">
                                                     <img src="{{ asset('assets/theme/index/default/images/index/starHalf.png') }}" alt="">
                                                     <img src="{{ asset('assets/theme/index/default/images/index/starHalf.png') }}" alt="">
                                                 </li>
-                                                <li class="clear">
+                                                <li class="clear" data-value="2">
                                                 	<img src="{{ asset('assets/theme/index/default/images/index/starFull.png') }}" alt="">
                                                     <img src="{{ asset('assets/theme/index/default/images/index/starFull.png') }}" alt="">
                                                     <img src="{{ asset('assets/theme/index/default/images/index/starHalf.png') }}" alt="">
                                                     <img src="{{ asset('assets/theme/index/default/images/index/starHalf.png') }}" alt="">
                                                     <img src="{{ asset('assets/theme/index/default/images/index/starHalf.png') }}" alt="">
                                                 </li>
-                                                <li class="clear">
+                                                <li class="clear" data-value="3">
                                                 	<img src="{{ asset('assets/theme/index/default/images/index/starFull.png') }}" alt="">
                                                     <img src="{{ asset('assets/theme/index/default/images/index/starFull.png') }}" alt="">
                                                     <img src="{{ asset('assets/theme/index/default/images/index/starFull.png') }}" alt="">
                                                     <img src="{{ asset('assets/theme/index/default/images/index/starHalf.png') }}" alt="">
                                                     <img src="{{ asset('assets/theme/index/default/images/index/starHalf.png') }}" alt="">
                                                 </li>
-                                                <li class="clear">
+                                                <li class="clear" data-value="4">
                                                 	<img src="{{ asset('assets/theme/index/default/images/index/starFull.png') }}" alt="">
                                                     <img src="{{ asset('assets/theme/index/default/images/index/starFull.png') }}" alt="">
                                                     <img src="{{ asset('assets/theme/index/default/images/index/starFull.png') }}" alt="">
                                                     <img src="{{ asset('assets/theme/index/default/images/index/starFull.png') }}" alt="">
                                                     <img src="{{ asset('assets/theme/index/default/images/index/starHalf.png') }}" alt="">
                                                 </li>
-                                                <li class="clear">
+                                                <li class="clear" data-value="5">
                                                 	<img src="{{ asset('assets/theme/index/default/images/index/starFull.png') }}" alt="">
                                                     <img src="{{ asset('assets/theme/index/default/images/index/starFull.png') }}" alt="">
                                                     <img src="{{ asset('assets/theme/index/default/images/index/starFull.png') }}" alt="">
@@ -441,62 +444,68 @@
                                                     <img src="{{ asset('assets/theme/index/default/images/index/starFull.png') }}" alt="">
                                                 </li>
                                            	</ul>
+                                               
+                                            <input type="hidden" name="rating" id="rating">
+                                               
+                                               @include('Index::common.form.error', ['key' => 'rating'])
+                                               <div class="text-center">
+                                                    <label for="rating" class="es-required" style="display:none;" data-error-after-label="1">Rating</label>
+                                               </div>
                                         </div>
                                     </div>
                                     <div class="reviewBox">
                                         <label>Your Message</label>
-                                        <textarea></textarea>
+                                        <textarea id="content" rows="5" style="resize: none;" placeholder="Message" name="content">{{ old('content') }}</textarea>
+                                        @include('Index::common.form.error', ['key' => 'content'])                                        
+                                        <div class="text-center"><label for="content" class="es-required" style="display:none;">Content</label></div>
                                     </div>
                                     <div class="reviewFinal">
                                         <div class="reviewCaptcha"><img src="{{ asset('assets/theme/index/default/images/index/recaptcha.png') }}" alt=""/></div>
                                         <div class="reviewTBtn">
-                                            <button class="reviewSubmit">Submit</button>
+                                            <button type="submit" class="reviewSubmit" id="add_review_button">Submit</button>
                                             <button class="reviewClose">X</button>
                                         </div>
                                     </div>
+
+                                    </form>
                                 </div>
                             </div>
                             <i class="fas fa-chevron-up"></i>
                         </div>
                     	<div class="pDetails">
-                        	<div class="reviewBlock">
-                            	<div class="reviewTitle">
-                                	<h4>John Doe</h4>
-                                    <div class="reviewDate">06/05/2020</div>
-                                    <div class="reviewRating">
-                                    	<a href="#"><i class="fas fa-star"></i></a>
-                                        <a href="#"><i class="fas fa-star"></i></a>
-                                        <a href="#"><i class="fas fa-star"></i></a>
-                                        <a href="#"><i class="far fa-star"></i></a>
-                                        <a href="#"><i class="far fa-star"></i></a>
+                            <div id="review_container">
+                                @php $i=0; @endphp
+                                @forelse ($user->reviews as $review)
+                                    @php $i++; @endphp
+                                    <div class="reviewBlock">
+                                        <div class="reviewTitle">
+                                            <h4>{{ucfirst($review->username)}}</h4>
+                                            <div class="reviewDate">{{ $review->date ?? '' }}</div>
+                                            {{-- rating --}}
+                                                @include('Index::profile.components.rating', ['rating_name' => '', 'rating_value' => (int)$review->rating])
+                                            {{-- end rating --}}
+                                            
+                                        </div>
+                                        <div class="reviewText">{{ $review->content ?? '' }}</div>
+                                        <div class="reviewReply">Hi John, thanks for dropping by and thank you<br>for the 3 stars! xoxo</div>
                                     </div>
+                                @empty                            
+                                <div class="reviewBlock">
+                                    <div class="reviewText">@lang('No data')</div>                            
                                 </div>
-                                <div class="reviewText">You are so hot! I would love to go out with you again! I really enjoyed our time and you really rock my world! Til our next meet!</div>
-                                <div class="reviewReply">Hi John, thanks for dropping by and thank you<br>
-for the 3 stars! xoxo</div>
-                            </div>
-                            <div class="reviewBlock">
-                            	<div class="reviewTitle">
-                                	<h4>Jaden</h4>
-                                    <div class="reviewDate">06/05/2020</div>
-                                    <div class="reviewRating">
-                                    	<a href="#"><i class="fas fa-star"></i></a>
-                                        <a href="#"><i class="fas fa-star"></i></a>
-                                        <a href="#"><i class="fas fa-star"></i></a>
-                                        <a href="#"><i class="far fa-star"></i></a>
-                                        <a href="#"><i class="far fa-star"></i></a>
-                                    </div>
+                                @endforelse
                                 </div>
-                                <div class="reviewText">I really love those photos of you, in fact I saved them all! Wish i could meet you soon.</div>
-                            </div>
-                            <div class="pagination">
-                                <a href="#"><i class="fas fa-angle-left"></i></a>
-                                <a href="#" class="active">1</a>
-                                <a href="#">2</a>
-                                <a href="#">3</a>
-                                <a href="#">4</a>
-                                <a href="#"><i class="fas fa-angle-right"></i></a>
-                            </div>
+                                @if ($user->reviews->lastPage() > 1)
+                                <input type="hidden" name="total_pages" id="total_pages" value="{{$user->reviews->lastPage()}}" />
+                                <div class="pagination">
+                                    <a href="{{ $user->reviews->url(1) }}" class="{{ ($user->reviews->currentPage() == 1) ? 'disable' : '' }}"><i class="fas fa-angle-left"></i></a>
+                                    @for ($i = 1; $i <= $user->reviews->lastPage(); $i++)
+                                        <a href="{{ $user->reviews->url($i) }}" class="{{ ($user->reviews->currentPage() == $i) ? 'active' : '' }}">{{ $i }}</a>
+                                    @endfor                                        
+                                    <a href="{{ $user->reviews->url($user->reviews->currentPage()+1) }}"><i class="fas fa-angle-right"></i></a>
+                                </div>
+                                @endif  
+                                                          
                         </div>
                     </div>
                 </div>
@@ -505,3 +514,56 @@ for the 3 stars! xoxo</div>
         </div>
     </div>
 @endsection
+
+@pushAssets('post.scripts')
+    <script type="text/javascript">
+        
+        $(document).ready(function(){
+            var $rating_items = $('.dropdown ul li');
+            $rating_items.on('click', function(){
+                $elm = $(this);
+                $new_rating = $elm.attr('data-value');
+                
+                $parent = $elm.closest('.dropdown');
+                if ($parent) {
+                    $current_rating = $parent.attr('data-rating');                    
+                    $parent.attr('data-rating', $new_rating);
+                    $parent.find('input[type="hidden"]').val($new_rating);
+                }
+            });
+
+            $(document).on('click', '.pagination a',function(event)
+            {
+                event.preventDefault();    
+                $('a').removeClass('active');
+                $(this).addClass('active');    
+                var myurl = $(this).attr('href');
+                var firstdata = $(this).attr('href').split('/profile/')[1];
+                var username = firstdata.split('?')[0];                
+                var page=$(this).attr('href').split('page=')[1]; 
+                var lastpage = $('#total_pages').val();
+                if(page>1){
+                    $( ".pagination a:first-child" ).removeClass('disable');
+                }else{
+                    $( ".pagination a:first-child" ).addClass('disable');
+                }
+                if(page == lastpage){
+                    $( ".pagination a:last-child" ).addClass('disable');
+                }else{
+                    $( ".pagination a:last-child" ).removeClass('disable');
+                }
+                var $url = '{{route("ajax.pagination")}}';
+                fnAjax({
+                    url: $url+'?page=' + page + '&username='+username,
+                    success: function(data) {
+                        $("#review_container").empty().html(data);
+                        //console.log(data);
+                        //$('.escortArea span').html('');
+                        //$('.escortArea span').html(data);
+                    }
+                });
+            });            
+
+        });       
+    </script>
+@endPushAssets

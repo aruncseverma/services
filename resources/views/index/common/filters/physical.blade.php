@@ -1,105 +1,91 @@
 {{-- Physical Filter --}}
-<h2 class="resp-accordion hor_1" role="tab"></h2>
-<div class="item-content row" id="filter_physical">
-    <div class="col-lg-10">
-        <form class="default_form">
-
-            {{-- Height --}}
-            <div style="margin-bottom: 6px; height: 34px">
-                <span class="advFilter-label">@lang('Height')</span>
-                <div class="select_parent selectTwo advFilter-drop">
-                    <select id="height" name="height">
-                        <option value="">Select Option</option>
-                        @foreach($heightOptions as $k => $v)
-                        <option value="{{ $k }}" @if(isset($param['height']) && $param['height']==$k ) selected @endif>{{ $v }} ({{ $k }} cm)</option>
-                        @endforeach
-                    </select>
-                </div>
+<div class="physicalF mobileN" id="filter_physical">
+    <div class="basicL">
+        <div class="pRange">
+            <div class="rangeArea">
+                <label>Height (Range)<span class="heightTotal"></span></label>                
+            </div> 
+            @php
+            if(isset($param['height']) && $param['height']!=''){
+                $height_param = $param['height'];
+            }
+            @endphp           
+            <div class="euroOption">
+                <input type="text" name="height" value="" id="heightRangeE"/>                
             </div>
-            {{-- End Height --}}
-
-            {{-- Hair Color --}}
-            <div style="margin-bottom: 6px; height: 34px">
-                <span class="advFilter-label">@lang('Hair Color')</span>
-                <div class="select_parent selectTwo advFilter-drop">
-                    <select id="hair_color" name="hair_color_id">
-                        <option value="">Select Option</option>
-                        @forelse($hairColors as $k)
-                        <option value="{{ $k->id }}" @if(isset($param['hair_color_id']) && $param['hair_color_id']==$k->id ) selected @endif>{{ $k->name }}</option>
-                        @empty
-                        @endforelse
-                    </select>
-                </div>
-            </div>
-            {{-- End Hair Color --}}
-
-            {{-- Hair Length --}}
-            <div style="margin-bottom: 6px; height: 34px">
-                <span class="advFilter-label">@lang('Hair Length')</span>
-                <div class="select_parent selectTwo advFilter-drop">
-                    <select id="hair_length" name="hair_length">
-                        <option value="">Select Option</option>
-                        @forelse($hairLengthOptions as $val => $lbl)
-                        <option value="{{ $val }}" @if(isset($param['hair_length']) && $param['hair_length']==$val ) selected @endif>{{ $lbl }}</option>
-                        @empty
-                        @endforelse
-                    </select>
-                </div>
-            </div>
-            {{-- End Hair Length --}}
-
-            {{-- Pubic Hair --}}
-            <div style="margin-bottom: 6px; height: 34px">
-                <span class="advFilter-label">@lang('Pubic Hair')</span>
-                <div class="select_parent selectTwo advFilter-drop">
-                    <select id="Ethnicity">
-                        <option value="">Select Option</option>
-                    </select>
-                </div>
-            </div>
-            {{-- End Pubic Hair --}}
-        </form>
+            
+        </div>
+        <div class="selectBox">
+            <label>Hair Color</label>
+            <select id="hair_color" name="hair_color_id">
+                <option value="">Please select</option>
+                @forelse($hairColors as $k)
+                <option value="{{ $k->id }}" @if(isset($param['hair_color_id']) && $param['hair_color_id']==$k->id ) selected @endif @if($k->total==0) disabled @endif>{{ $k->content }} ({{$k->total}})</option>
+                @empty
+                @endforelse
+            </select>
+            <span class="fNumber hairColorTotal"></span>
+        </div>
+        <div class="selectBox">
+            <label>Breast Size</label>
+            <select id="cup_size" name="cup_size">
+                <option value="">Please select</option>
+                @forelse($cupSizeOptions as $cup)                
+                <option value="{{ $cup->id }}" @if(isset($param['cup_size']) && $param['cup_size']==$cup->id ) selected @endif @if($cup->total==0) disabled @endif>{{ $cup->content }} ({{$cup->total}})</option> 
+                @empty
+                @endforelse 
+            </select>
+            <span class="fNumber cupSizeTotal"></span>
+        </div>
+        <div class="selectBox">
+            <label>Build</label>
+            <select id="body_type" name="body_type">
+                <option value="">Please select</option>
+                @forelse($buildOptions as $build)                
+                <option value="{{ $build->id }}" @if(isset($param['body_type']) && $param['body_type']==$build->id ) selected @endif @if($build->total==0) disabled @endif>{{ $build->content }} ({{$build->total}})</option> 
+                @empty
+                @endforelse 
+            </select>
+            <span class="fNumber buildTotal"></span>
+        </div>
     </div>
-
-    <div class="col-lg-10">
-        <form class="default_form">
-
-            {{-- Breast Size --}}
-            <div style="margin-bottom: 6px; height: 34px">
-                <span class="advFilter-label">@lang('Breast Size')</span>
-                <div class="select_parent selectTwo advFilter-drop">
-                    <select id="Country">
-                        <option value="">Select Option</option>
-                    </select>
-                </div>
-            </div>
-            {{-- End Breast Size --}}
-
-            {{-- Dress Size --}}
-            <div style="margin-bottom: 6px; height: 34px">
-                <span class="advFilter-label">@lang('Dress Size')</span>
-                <div class="select_parent selectTwo advFilter-drop">
-                    <select id="Country">
-                        <option value="">Select Option</option>
-                    </select>
-                </div>
-            </div>
-            {{-- End Dress Size --}}
-
-            {{-- Eye Color --}}
-            <div style="margin-bottom: 6px; height: 34px">
-                <span class="advFilter-label">@lang('Eye Color')</span>
-                <div class="select_parent selectTwo advFilter-drop">
-                    <select id="eye_color" name="eye_color_id">
-                        <option value="">Select Option</option>
-                        @forelse($eyeColors as $k)
-                        <option value="{{ $k->id }}" @if(isset($param['eye_color_id']) && $param['eye_color_id']==$k->id ) selected @endif>{{ $k->name }}</option>
-                        @empty
-                        @endforelse
-                    </select>
-                </div>
-            </div>
-            {{-- End Eye Color --}}
-        </form>
+    <div class="basicR">
+        <div class="selectBox">
+            <label>Hair Length</label>
+            <select id="hair_length" name="hair_length">
+                <option value="">Please select</option>
+                @forelse($hairLengthOptions as $val => $lbl)
+                <option value="{{ $val }}" @if(isset($param['hair_length']) && $param['hair_length']==$val ) selected @endif>{{ $lbl }}</option>
+                @empty
+                @endforelse                    
+            </select>
+            <span class="fNumber hairLengthTotal"></span>
+        </div>
+        <div class="selectBox">
+            <label>Eye Color</label>
+            <select id="eye_color" name="eye_color_id">
+                <option value="">Please select</option>
+                @forelse($eyeColors as $k)
+                <option value="{{ $k->id }}" @if(isset($param['eye_color_id']) && $param['eye_color_id']==$k->id ) selected @endif @if($k->total==0) disabled @endif>{{ $k->content }} ({{$k->total}})</option>
+                @empty
+                @endforelse
+            </select>
+            <span class="fNumber eyeColorTotal"></span>
+        </div>
+        <div class="selectBox">
+            <label>Pubic Hair</label>
+            <select id="public_hair" name="public_hair">
+                <option value="">Please select</option>
+                @forelse($publicHairs as $phair)                
+                <option value="{{ $phair->id }}" @if(isset($param['public_hair']) && $param['public_hair']==$phair->id ) selected @endif @if($phair->total==0) disabled @endif>{{ $phair->content }} ({{$phair->total}})</option> 
+                @empty
+                @endforelse               
+            </select>
+            <span class="fNumber publicHairTotal"></span>
+        </div>
+        <div class="twoBtn">
+            <input type="reset" value="Reset" id="physicalresetbtn" class="resetBtn">
+            <a href="#" class="closeBtn">X</a>
+        </div>
     </div>
 </div>

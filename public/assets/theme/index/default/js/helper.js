@@ -8,7 +8,7 @@ function fn_get_notification_html(type, message)
         notification_html += '<div class="alert alert-' + type + '">';
     }
 
-    notification_html += '<button type="button" class="close" data-dismiss="alert" aria-label="Close"> <span aria-hidden="true">×</span> </button>';
+    notification_html += '<button type="button" class="close" onclick="closenotice();" data-dismiss="alert" aria-label="Close"> <span aria-hidden="true">×</span> </button>';
 
     switch (type) {
         case 'success':
@@ -35,6 +35,9 @@ function fn_set_notification(type, message)
 {
     var notification_html = fn_get_notification_html(type, message);
     $('#notification-container').html(notification_html);
+    $('.reviewPopup').hide();
+	$('body').removeClass("reviewBg");
+    $(window).scrollTop(0);
 }
 function fn_set_notifications(notifications)
 {
@@ -43,6 +46,9 @@ function fn_set_notifications(notifications)
         notification_html += fn_get_notification_html(value.type, value.message);
     });
     $('#notification-container').html(notification_html);
+    $('.reviewPopup').hide();
+	$('body').removeClass("reviewBg");
+    $(window).scrollTop(0);
 }
 
 function fn_form_ajax(forms)
@@ -705,4 +711,8 @@ function notify(type, message, timeout) {
         type: type,
         allow_dismiss: true
     })
+}
+
+function closenotice(){
+    $('#notification-container').html('');
 }

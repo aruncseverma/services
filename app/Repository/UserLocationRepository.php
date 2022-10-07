@@ -70,6 +70,7 @@ class UserLocationRepository extends Repository
     public function getEscortLocations(string $param, string $key, array $otherConditions = [])
     {
         $model = $this->getModel()->newModelInstance()
+            ->with('continent')
             ->with('country')
             ->with('state')
             ->with('city');
@@ -96,14 +97,23 @@ class UserLocationRepository extends Repository
             $model->select('city_id', DB::raw('count(*) as total'));
             $model->where("{$mainTable}.state_id", $key);
             $model->groupBy('city_id');
-        } else {
+        } else if ($param == 'country') {
             $relation = $model->getModel()->country();
             $foreignTable = $relation->getModel()->getTable();
 
             $model->join($foreignTable, "{$mainTable}.{$relation->getForeignKeyName()}", "=", "{$foreignTable}.{$mainTableKey}");
 
             $model->select('country_id', DB::raw('count(*) as total'));
+            $model->where("{$mainTable}.continent_id", $key);
             $model->groupBy('country_id');
+        } else {
+            $relation = $model->getModel()->continent();
+            $foreignTable = $relation->getModel()->getTable();
+
+            $model->join($foreignTable, "{$mainTable}.{$relation->getForeignKeyName()}", "=", "{$foreignTable}.{$mainTableKey}");
+
+            $model->select('continent_id', DB::raw('count(*) as total'));
+            $model->groupBy('continent_id');
         }
 
         if (!empty($otherConditions)) {

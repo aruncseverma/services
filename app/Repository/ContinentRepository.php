@@ -20,4 +20,18 @@ class ContinentRepository extends Repository
     {
         $this->bootEloquentRepository($model);
     }
+
+    /**
+     * fetches country information by name
+     *
+     * @param int $continent
+     * @return Continent|null
+     */
+    public function getContinentById($continent) : ?Continent
+    {
+        return $this->getBuilder()
+            ->where('id', $continent)
+            ->first();
+    }
+
 }

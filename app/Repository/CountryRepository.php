@@ -89,4 +89,17 @@ class CountryRepository extends Repository
             ->where('name', $country)
             ->first();
     }
+
+    /**
+     * fetches country information by name
+     *
+     * @param int $country
+     * @return Country|null
+     */
+    public function getCountryById($country) : ?Country
+    {
+        return $this->getBuilder()
+            ->where('id', $country)
+            ->first();
+    }
 }

@@ -1,5 +1,5 @@
 
-    <div class="grid-item">
+    <div class="grid-item filter-item">
         <div class="modelPic">
             <div class="topNVip">
                 <div class="new">NEW</div>

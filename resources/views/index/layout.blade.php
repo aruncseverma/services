@@ -26,17 +26,17 @@
     @include('Index::common.scripts')
     {{-- end scripts --}}
 </head>
-
 <body>
-    <!--<div class="preloader">
-        <svg class="circular" viewBox="25 25 50 50">
-            <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="2" stroke-miterlimit="10" /> </svg>
-    </div>-->
+<div id="overlay">
+  <div class="cv-spinner">
+    <span class="spinner"></span>
+  </div>
+</div>
     <div class="warningPop" id="warningpopup">
         <div class="warningScroll">
             <div class="warningSpace">
                 <div class="warningPopB">
-                    <div class="warningLogo"><img alt="" src="{{ asset('assets/theme/index/default/images/index/logo.png')}}"></div>
+                    <div class="warningLogo"><img alt="" src="{{ asset('assets/theme/index/default/images/index/logo.png') }}"></div>
                     <div class="wContent">
                         <p>This website is showing adult contents and is strictly prohibited for persons under 18 years old. We decline any responsibility in case of abuse.</p>
                         <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
@@ -55,7 +55,12 @@
             @include('Index::common.header')
             {{-- End Header--}}
         </header>        
-        <div class="bodyArea">                
+        <div class="bodyArea">   
+            {{-- Notifications --}}
+                <div class="centerwrap" id="notification-container">
+                    @include('EscortAdmin::common.notifications')
+                </div>
+            {{-- End Notifications --}}             
             <div class="mobileMenu">
                 <div class="mobileWbg">
                     <ul class="mMenu">
@@ -127,6 +132,9 @@
 
 <!-- Matomo -->
 <script>
+
+
+
   var _paq = window._paq = window._paq || [];
   / tracker methods like "setCustomDimension" should be called before "trackPageView" /
   _paq.push(['trackPageView']);

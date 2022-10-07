@@ -116,4 +116,16 @@ class StateRepository extends Repository
             ->where('name', $state)
             ->first();
     }
+
+    /**
+     * Finds the state details
+     * @param  int $state
+     * @return State|null
+     */
+    public function getStateById($state) : ?State
+    {
+        return $this->getBuilder()
+            ->where('id', $state)
+            ->first();
+    }
 }

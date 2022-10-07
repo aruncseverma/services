@@ -4,7 +4,17 @@
 {{-- Attributes Filter --}}
 @include('Index::home.filter')
 {{-- End Attributes Filter--}}
-
+<div class="topMFilter autoScroll">
+    <div class="topMFilterM">
+        <ul class="clear">
+            <li><a href="{{ route('index.home') }}" @if(Route::current()->getName() == 'index.home') class="active" @endif>ALL ESCORTS</a></li>
+            <li><a href="{{ route('index.filter', ['today' => 1]) }}" @if(isset($param['today']) && $param['today']==1 ) class="active" @endif>TODAYS ESCORTS</a></li>
+            <li><a href="{{ route('index.filter', ['new' => 1]) }}" @if(isset($param['new']) && $param['new']==1 ) class="active" @endif>NEW ESCORTS</a></li>
+            <li><a href="#">TRAVELING ESCORTS</a></li>
+            <li><a href="{{ route('index.filter', ['pornstar' => 'Y']) }}" @if(isset($param['pornstar']) && $param['pornstar']=='Y' ) class="active" @endif>PORNSTAR ESCORTS</a></li>
+        </ul>
+    </div>
+</div>
 <div class="centerwrap clear">
     <div class="filterLo">
         <div class="genderFilter">
@@ -18,11 +28,20 @@
         {{-- End Escort Location Filter --}}
     </div>
     
-        <div class="grid">
+    <div class="grid">
+        <div class="grid-item stamp2 stamp-nav" style="position:absolute;">
+            <ul class="escortFilterD">
+                <li><a href="{{ route('index.home') }}" id="all_escort" @if(Route::current()->getName() == 'index.home') class="active" @endif>ALL ESCORTS</a></li>
+                <li><a href="{{ route('index.filter', ['today' => 1]) }}" @if(isset($param['today']) && $param['today']==1 ) class="active" @endif>TODAYS ESCORTS</a></li>
+                <li><a href="{{ route('index.filter', ['new' => 1]) }}" @if(isset($param['new']) && $param['new']==1 ) class="active" @endif>NEW ESCORTS</a></li>
+                <li><a href="#">TRAVELING ESCORTS</a></li>
+                <li><a href="{{ route('index.filter', ['pornstar' => 'Y']) }}" @if(isset($param['pornstar']) && $param['pornstar']=='Y' ) class="active" @endif>PORNSTAR ESCORTS</a></li>
+            </ul>
+        </div>
         {{-- Escort Display --}}
                 @include('Index::home.components.escort_listing', ['escorts' => $escorts])
         {{-- End escort display --}}
-        </div>
+    </div>
     
 </div>
 

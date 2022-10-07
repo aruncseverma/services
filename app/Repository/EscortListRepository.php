@@ -11,6 +11,7 @@ use App\Models\EscortList;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
 
+
 class EscortListRepository extends EscortRepository
 {
     /**
@@ -38,6 +39,7 @@ class EscortListRepository extends EscortRepository
 
         return $escorts;
     }
+    
 
     /**
      * fetches all escorts according to provided filter
@@ -46,7 +48,7 @@ class EscortListRepository extends EscortRepository
      * @return Collection|null
      */
     public function filter(array $params)
-    {
+    {       
         $model = $this->getBuilder();
         $mainTable = $model->getModel()->getTable();
         $mainTableKey = $model->getModel()->getKeyName();
@@ -57,7 +59,8 @@ class EscortListRepository extends EscortRepository
             ->with('mainLocation')
             ->with('mainLocation.city');
 
-        //$mainTable = $model->getModel()->getTable();
+        $mainTable = $model->getModel()->getTable();
+        //$mainTable = users
         $model->select("{$mainTable}.*");
     
         $model->where("{$mainTable}.type", Escort::USER_TYPE)
@@ -115,10 +118,12 @@ class EscortListRepository extends EscortRepository
 
             // filter by height
             if (isset($params['height'])) {
+                $height = explode('-', $params['height']);
                 $asTable = 'heightData';
                 $model->join("$foreignTable as $asTable", "{$mainTable}.{$mainTableKey}", "=", $asTable . '.' . $foreignKeyName);
                 $model->where("{$asTable}.field", "height_id");
-                $model->where("{$asTable}.content", $params['height']);
+                $model->where("{$asTable}.content", '<=', $height[1]);
+                $model->where("{$asTable}.content", '>=', $height[0]);
             }
 
             // filter by orientation
@@ -183,7 +188,11 @@ class EscortListRepository extends EscortRepository
 
         // filter by verification
         if (isset($params['verification'])) {
-            $model->where('user_group_id', $params['verification']);
+            if ($params['verification']=='1') {
+                $model->where('is_verified', $params['verification']);
+            } else {
+                $model->where('user_group_id', $params['verification']);
+            }
         }
 
         // select average
@@ -227,7 +236,37 @@ class EscortListRepository extends EscortRepository
         }
 
         // filter by country
-        if (isset($params['country_id'])) {
+        if (isset($params['continent_id'])) {
+            $relation = $model->getModel()->mainLocation();
+            $mainTable = $model->getModel()->getTable();
+            $mainTableKey = $model->getModel()->getKeyName();
+            $foreignTable = $relation->getModel()->getTable();
+            //dd($foreignTable);
+            $model->join($foreignTable, "{$mainTable}.{$mainTableKey}", "=", $relation->getQualifiedForeignKeyName());
+            $model->where('continent_id', $params['continent_id']);
+
+            if (isset($params['country_id'])) {
+                $model->where('country_id', $params['country_id']);
+            }
+
+            if (isset($params['state_id'])) {
+                $model->where('state_id', $params['state_id']);
+            }
+
+            if (isset($params['city_id'])) {
+                $model->where('city_id', $params['city_id']);
+            }
+
+            $model->select(["{$mainTable}.*",
+                "{$foreignTable}.continent_id",
+                "{$foreignTable}.country_id",
+                "{$foreignTable}.state_id",
+                "{$foreignTable}.city_id"
+            ]);
+        }
+
+
+        /*if (isset($params['country_id'])) {
             $relation = $model->getModel()->mainLocation();
             $mainTable = $model->getModel()->getTable();
             $mainTableKey = $model->getModel()->getKeyName();
@@ -249,7 +288,7 @@ class EscortListRepository extends EscortRepository
                 "{$foreignTable}.state_id", 
                 "{$foreignTable}.city_id"
             ]);
-        }
+        }*/
 
         // filter by video
         if (isset($params['with_video'])) {
@@ -350,8 +389,8 @@ class EscortListRepository extends EscortRepository
         }
 
         $model->groupBy('id');
-
-        //dump($model->toSql());
+        
+        //dd($model->toSql());
         //dd($model->get()->toArray());
         return $model->get();
         
@@ -362,16 +401,41 @@ class EscortListRepository extends EscortRepository
      * @param bool $withReview
      * @return int
      */
-    public function getTotalEscortByReview($withReview = true)
+    public function getTotalEscortByReview($withReview = true, $params)
     {
         $model = $this->getBuilder();
         $mainTable = $model->getModel()->getTable();
         $mainTableKey = $model->getModel()->getKeyName();
         $foreignTable = 'user_reviews';
 
-        $model->selectRaw('COUNT(*) as total');
-        $model->where("{$mainTable}.type", Escort::USER_TYPE);
-        $model->where("{$mainTable}.is_approved", 1);
+        $model->join('users_data', "{$mainTable}.{$mainTableKey}", "=", 'users_data.user_id');
+
+        foreach ($params as $key => $value) {
+            if ($key=='gender' && $value=='') {
+                $model->where("{$mainTable}.gender", "F");
+            } elseif ($key=='gender' && $value!='') {
+                $model->where("{$mainTable}.gender", $value);
+            } elseif ($key=='hair_color' && $value!='') {
+                $model->where("users_data.hair_color", $value);
+            } elseif ($key=='eye_color' && $value!='') {
+                $model->where("users_data.eye_color", $value);
+            } elseif ($key=='public_hair' && $value!='') {
+                $model->where("users_data.public_hair", $value);
+            } elseif ($key=='cup_size' && $value!='') {
+                $model->where("users_data.cup_size", $value);
+            } elseif ($key=='travel' && $value!='') {
+                $model->where("users_data.travel", $value);
+            } elseif ($key=='body_type' && $value!='') {
+                $model->where("users_data.body_type", $value);
+            } elseif ($key=='drink' && $value!='') {
+                $model->where("users_data.drink", $value);
+            } elseif ($key=='smoke' && $value!='') {
+                $model->where("users_data.smoke", $value);
+            } elseif ($key=='escort_type' && $value!='') {
+                $model->where("users_data.escort_type", $value);
+            }
+        }
+        
 
         if ($withReview) {
             $whereExists = "1 FROM {$foreignTable} WHERE object_id = " . $mainTable . '.' . $mainTableKey;
@@ -384,8 +448,16 @@ class EscortListRepository extends EscortRepository
                 $query->select(DB::raw($whereExists));
             });
         }
-        
-        return $model->first()->total;
+        $model->selectRaw('users_data.user_id');
+        $model->where("{$mainTable}.type", Escort::USER_TYPE);
+        $model->where("{$mainTable}.is_approved", 1);
+        $result = $model->groupBy("users_data.user_id")->get();
+        $data = array();
+        foreach ($result as $res) {
+            array_push($data, $res->user_id);
+        }
+        $reviewcount = count(array_unique($data));
+        return $reviewcount;
     }
 
     /**
@@ -393,17 +465,39 @@ class EscortListRepository extends EscortRepository
      * @param bool $withVideo
      * @return int
      */
-    public function getTotalEscortByVideo($withVideo = true)
+    public function getTotalEscortByVideo($withVideo = true, $params)
     {
         $model = $this->getBuilder();
         $mainTable = $model->getModel()->getTable();
         $mainTableKey = $model->getModel()->getKeyName();
         $foreignTable = 'user_videos';
 
-        $model->selectRaw('COUNT(*) as total');
-        $model->where("{$mainTable}.type", Escort::USER_TYPE);
-        $model->where("{$mainTable}.is_approved", 1);
-
+        $model->join('users_data', "{$mainTable}.{$mainTableKey}", "=", 'users_data.user_id');
+        foreach ($params as $key => $value) {
+            if ($key=='gender' && $value=='') {
+                $model->where("{$mainTable}.gender", "F");
+            } elseif ($key=='gender' && $value!='') {
+                $model->where("{$mainTable}.gender", $value);
+            } elseif ($key=='hair_color' && $value!='') {
+                $model->where("users_data.hair_color", $value);
+            } elseif ($key=='eye_color' && $value!='') {
+                $model->where("users_data.eye_color", $value);
+            } elseif ($key=='public_hair' && $value!='') {
+                $model->where("users_data.public_hair", $value);
+            } elseif ($key=='cup_size' && $value!='') {
+                $model->where("users_data.cup_size", $value);
+            } elseif ($key=='travel' && $value!='') {
+                $model->where("users_data.travel", $value);
+            } elseif ($key=='body_type' && $value!='') {
+                $model->where("users_data.body_type", $value);
+            } elseif ($key=='drink' && $value!='') {
+                $model->where("users_data.drink", $value);
+            } elseif ($key=='smoke' && $value!='') {
+                $model->where("users_data.smoke", $value);
+            } elseif ($key=='escort_type' && $value!='') {
+                $model->where("users_data.escort_type", $value);
+            }
+        }
         if ($withVideo) {
             $whereExists = "1 FROM {$foreignTable} WHERE user_id = " . $mainTable . '.' . $mainTableKey;
             $model->whereExists(function ($query) use ($whereExists) {
@@ -415,15 +509,25 @@ class EscortListRepository extends EscortRepository
                 $query->select(DB::raw($whereExists));
             });
         }
-
-        return $model->first()->total;
+        
+        $model->select('users_data.user_id');
+        $model->where("{$mainTable}.type", Escort::USER_TYPE);
+        $model->where("{$mainTable}.is_approved", 1);
+        $result = $model->groupBy("users_data.user_id")->get();
+        $data = array();
+        foreach ($result as $res) {
+            array_push($data, $res->user_id);
+        }
+        $videocount = count(array_unique($data));
+        
+        return $videocount;
     }
 
     /**
      * Get total escort by availability
      * @return array|null
      */
-    public function getTotalEscortByAvailability()
+    public function getTotalEscortByAvailability($params)
     {
         $model = $this->getBuilder();
         $mainTable = $model->getModel()->getTable();
@@ -437,6 +541,31 @@ class EscortListRepository extends EscortRepository
 
         $model->join($foreignTable, "{$mainTable}.{$mainTableKey}", "=", $relation->getQualifiedForeignKeyName());
         $model->where("{$foreignTable}.field", "service_type");
+        foreach ($params as $key => $value) {
+            if ($key=='gender' && $value=='') {
+                $model->where("{$mainTable}.gender", "F");
+            } elseif ($key=='gender' && $value!='') {
+                $model->where("{$mainTable}.gender", $value);
+            } elseif ($key=='hair_color' && $value!='') {
+                $model->where("{$foreignTable}.hair_color", $value);
+            } elseif ($key=='eye_color' && $value!='') {
+                $model->where("{$foreignTable}.eye_color", $value);
+            } elseif ($key=='public_hair' && $value!='') {
+                $model->where("{$foreignTable}.public_hair", $value);
+            } elseif ($key=='cup_size' && $value!='') {
+                $model->where("{$foreignTable}.cup_size", $value);
+            } elseif ($key=='travel' && $value!='') {
+                $model->where("{$foreignTable}.travel", $value);
+            } elseif ($key=='body_type' && $value!='') {
+                $model->where("{$foreignTable}.body_type", $value);
+            } elseif ($key=='drink' && $value!='') {
+                $model->where("{$foreignTable}.drink", $value);
+            } elseif ($key=='smoke' && $value!='') {
+                $model->where("{$foreignTable}.smoke", $value);
+            } elseif ($key=='escort_type' && $value!='') {
+                $model->where("{$foreignTable}.escort_type", $value);
+            }
+        }
         $model->groupBy("{$foreignTable}.content");
         $res = $model->get()->pluck('total', 'content');
         return $res;
@@ -447,7 +576,7 @@ class EscortListRepository extends EscortRepository
      *
      * @return Collection
      */
-    public function getEscortOrigins()
+    public function getEscortOrigins($params)
     {
         $model = $this->getBuilder();
         $mainTable = $model->getModel()->getTable();
@@ -473,9 +602,7 @@ class EscortListRepository extends EscortRepository
         return $res;
 
 
-        $model = $this->getModel()->newModelInstance()
-            ->with('country');
-
+        $model = $this->getModel()->newModelInstance()->with('country');
         $mainTable = $model->getModel()->getTable();
         $mainTableKey = $model->getModel()->getKeyName();
 
@@ -483,10 +610,270 @@ class EscortListRepository extends EscortRepository
         $foreignTable = $relation->getModel()->getTable();
 
         $model->join($foreignTable, "{$mainTable}.{$relation->getForeignKey()}", "=", "{$foreignTable}.{$mainTableKey}");
-
+        foreach ($params as $key => $value) {
+            if ($key=='gender' && $value=='') {
+                $model->where("{$mainTable}.gender", "F");
+            } elseif ($key=='gender' && $value!='') {
+                $model->where("{$mainTable}.gender", $value);
+            } elseif ($key=='hair_color' && $value!='') {
+                $model->where("{$foreignTable}.hair_color", $value);
+            } elseif ($key=='eye_color' && $value!='') {
+                $model->where("{$foreignTable}.eye_color", $value);
+            } elseif ($key=='public_hair' && $value!='') {
+                $model->where("{$foreignTable}.public_hair", $value);
+            } elseif ($key=='cup_size' && $value!='') {
+                $model->where("{$foreignTable}.cup_size", $value);
+            } elseif ($key=='travel' && $value!='') {
+                $model->where("{$foreignTable}.travel", $value);
+            } elseif ($key=='body_type' && $value!='') {
+                $model->where("{$foreignTable}.body_type", $value);
+            } elseif ($key=='drink' && $value!='') {
+                $model->where("{$foreignTable}.drink", $value);
+            } elseif ($key=='smoke' && $value!='') {
+                $model->where("{$foreignTable}.smoke", $value);
+            } elseif ($key=='escort_type' && $value!='') {
+                $model->where("{$foreignTable}.escort_type", $value);
+            }
+        }
         $model->select('country_id', DB::raw('count(*) as total'));
         $model->groupBy('country_id');
 
         return $model->orderBy('name')->get();
     }
+
+    public function getEscortTotalByGender($gender, $params)
+    {
+        $model = $this->getBuilder();
+        $mainTable = $model->getModel()->getTable();
+        $model->leftJoin('users_data', 'users.id', '=', 'users_data.user_id');
+        foreach ($params as $key => $value) {
+            if ($key=='hair_color' && $value!='') {
+                $model->where("users_data.hair_color", $value);
+            } elseif ($key=='eye_color' && $value!='') {
+                $model->where("users_data.eye_color", $value);
+            } elseif ($key=='public_hair' && $value!='') {
+                $model->where("users_data.public_hair", $value);
+            } elseif ($key=='cup_size' && $value!='') {
+                $model->where("users_data.cup_size", $value);
+            } elseif ($key=='travel' && $value!='') {
+                $model->where("users_data.travel", $value);
+            } elseif ($key=='body_type' && $value!='') {
+                $model->where("users_data.body_type", $value);
+            } elseif ($key=='drink' && $value!='') {
+                $model->where("users_data.drink", $value);
+            } elseif ($key=='smoke' && $value!='') {
+                $model->where("users_data.smoke", $value);
+            } elseif ($key=='escort_type' && $value!='') {
+                $model->where("users_data.escort_type", $value);
+            }
+        }
+        $model->selectRaw('users_data.user_id');
+        $model->where("{$mainTable}.type", Escort::USER_TYPE);
+        $model->where("{$mainTable}.gender", $gender);
+        $result = $model->groupBy("users_data.user_id")->get();
+        $data = array();
+        foreach ($result as $res) {
+            array_push($data, $res->user_id);
+        }
+
+        $totalgender = count(array_unique($data)); 
+        return $totalgender;
+    }
+
+    public function getEthinicityByEscortTotal($params)
+    {
+        $query = DB::table('attribute_descriptions');
+        $query->leftJoin('attributes', 'attribute_descriptions.attribute_id', '=', 'attributes.id');
+        $query->where('attributes.name', 'ethnicity');
+        $result = $query->select('attributes.id as atid', 'attribute_descriptions.*')->groupBy('attributes.id')->get();
+        $ethinicitylist = array();
+        foreach ($result as $res)
+        {
+            $sql = DB::table('users');
+            $sql->leftJoin('users_data', 'users.id', '=', 'users_data.user_id');
+            $sql->where("users.type", Escort::USER_TYPE);
+            $sql->where("users.is_approved", 1);
+            foreach ($params as $key => $value) {
+                if ($key=='gender' && $value=='') {
+                    $sql->where("users.gender", "F");
+                } elseif ($key=='gender' && $value!='') {
+                    $sql->where("users.gender", $value);
+                } elseif ($key=='hair_color' && $value!='') {
+                    $sql->where("users_data.hair_color", $value);
+                } elseif ($key=='eye_color' && $value!='') {
+                    $sql->where("users_data.eye_color", $value);
+                } elseif ($key=='public_hair' && $value!='') {
+                    $sql->where("users_data.public_hair", $value);
+                } elseif ($key=='cup_size' && $value!='') {
+                    $sql->where("users_data.cup_size", $value);
+                } elseif ($key=='travel' && $value!='') {
+                    $sql->where("users_data.travel", $value);
+                } elseif ($key=='body_type' && $value!='') {
+                    $sql->where("users_data.body_type", $value);
+                } elseif ($key=='drink' && $value!='') {
+                    $sql->where("users_data.drink", $value);
+                } elseif ($key=='smoke' && $value!='') {
+                    $sql->where("users_data.smoke", $value);
+                } elseif ($key=='escort_type' && $value!='') {
+                    $sql->where("users_data.escort_type", $value);
+                }
+            }
+            $sql->where('users_data.field', 'ethnicity_id');
+            $sql->where('users_data.content', $res->id);
+            $sql->selectRaw('COUNT(*) as total');
+            $ethinicitylist[] = array(
+                'id' => $res->id,
+                'content' => $res->content,
+                'total' => $sql->first()->total,
+            );
+        }
+        return json_decode(json_encode($ethinicitylist), FALSE);
+    }
+
+    public function getEscortVerificationCount($verified, $params)
+    {
+        
+        $model = DB::table('users');
+        $model->where("users.type", Escort::USER_TYPE);
+        $model->where("users.is_verified", $verified);
+        $model->whereNull("users.user_group_id");
+        if (!isset($params['gender'])) {
+            $model->where("users.gender", "F");
+        } else {
+            $model->where("users.gender", $params['gender']);
+        }
+        
+        $result = $model->select('users.id')->get();
+        $count = array();
+        foreach ($result as $res) {
+            $model = DB::table('users_data');
+            foreach ($params as $key => $value) {
+                if ($key=='hair_color' && $value!='') {
+                    $model->where("users_data.hair_color", $value);
+                } elseif ($key=='eye_color' && $value!='') {
+                    $model->where("users_data.eye_color", $value);
+                } elseif ($key=='public_hair' && $value!='') {
+                    $model->where("users_data.public_hair", $value);
+                } elseif ($key=='cup_size' && $value!='') {
+                    $model->where("users_data.cup_size", $value);
+                } elseif ($key=='travel' && $value!='') {
+                    $model->where("users_data.travel", $value);
+                } elseif ($key=='body_type' && $value!='') {
+                    $model->where("users_data.body_type", $value);
+                } elseif ($key=='drink' && $value!='') {
+                    $model->where("users_data.drink", $value);
+                } elseif ($key=='smoke' && $value!='') {
+                    $model->where("users_data.smoke", $value);
+                } elseif ($key=='escort_type' && $value!='') {
+                    $model->where("users_data.escort_type", $value);
+                }
+            }
+            $model->where('user_id', $res->id);
+            $model->selectRaw('COUNT(*) as total');
+            array_push($count, $model->first()->total);
+        }
+
+        $totalverified = count($count);
+        return $totalverified;
+    }
+
+    public function getEscortSilverGoldCount($silver, $params)
+    {
+        $model = $this->getBuilder();
+        $mainTable = $model->getModel()->getTable();
+        $model->where("{$mainTable}.type", Escort::USER_TYPE);
+        $model->where("{$mainTable}.is_verified", '1');
+        $model->where("{$mainTable}.user_group_id", $silver);
+
+        if (!isset($params['gender'])) {
+            $model->where("{$mainTable}.gender", "F");
+        } else {
+            $model->where("{$mainTable}.gender", $params['gender']);
+        }
+
+        $result = $model->select('users.id')->get();
+        $count = array();
+        foreach ($result as $res) {
+            $model = DB::table('users_data');
+            foreach ($params as $key => $value) {
+                if ($key=='hair_color' && $value!='') {
+                    $model->where("users_data.hair_color", $value);
+                } elseif ($key=='eye_color' && $value!='') {
+                    $model->where("users_data.eye_color", $value);
+                } elseif ($key=='public_hair' && $value!='') {
+                    $model->where("users_data.public_hair", $value);
+                } elseif ($key=='cup_size' && $value!='') {
+                    $model->where("users_data.cup_size", $value);
+                } elseif ($key=='travel' && $value!='') {
+                    $model->where("users_data.travel", $value);
+                } elseif ($key=='body_type' && $value!='') {
+                    $model->where("users_data.body_type", $value);
+                } elseif ($key=='drink' && $value!='') {
+                    $model->where("users_data.drink", $value);
+                } elseif ($key=='smoke' && $value!='') {
+                    $model->where("users_data.smoke", $value);
+                } elseif ($key=='escort_type' && $value!='') {
+                    $model->where("users_data.escort_type", $value);
+                }
+            }
+            $model->where('user_id', $res->id);
+            $model->selectRaw('COUNT(*) as total');
+            array_push($count, $model->first()->total);
+        }
+
+        $totalverified = count($count);
+        return $totalverified;
+    }
+
+    public function getEscortCountAttributes($columnname, $params)
+    {
+        $query = DB::table('attribute_descriptions');
+        $query->leftJoin('attributes', 'attribute_descriptions.attribute_id', '=', 'attributes.id');
+        $query->where('attributes.name', $columnname);
+        $result = $query->select('attributes.id as atid', 'attribute_descriptions.*')->groupBy('attributes.id')->get();
+        $data = array();
+        foreach ($result as $res)
+        {
+            $sql = DB::table('users');
+            $sql->leftJoin('users_data', 'users.id', '=', 'users_data.user_id');
+            $sql->where("users.type", Escort::USER_TYPE);
+            $sql->where("users.is_approved", 1);
+            foreach ( $params as $key => $value ) {
+                if ($key=='gender' && $value=='') {
+                    $sql->where("users.gender", "F");
+                } elseif ($key=='gender' && $value!='') {
+                    $sql->where("users.gender", $value);
+                } elseif ($key=='hair_color' && $value!='') {
+                    $sql->where("users_data.hair_color", $value);
+                } elseif ($key=='eye_color' && $value!='') {
+                    $sql->where("users_data.eye_color", $value);
+                } elseif ($key=='public_hair' && $value!='') {
+                    $sql->where("users_data.public_hair", $value);
+                } elseif ($key=='cup_size' && $value!='') {
+                    $sql->where("users_data.cup_size", $value);
+                } elseif ($key=='travel' && $value!='') {
+                    $sql->where("users_data.travel", $value);
+                } elseif ($key=='body_type' && $value!='') {
+                    $sql->where("users_data.body_type", $value);
+                } elseif ($key=='drink' && $value!='') {
+                    $sql->where("users_data.drink", $value);
+                } elseif ($key=='smoke' && $value!='') {
+                    $sql->where("users_data.smoke", $value);
+                } elseif ($key=='escort_type' && $value!='') {
+                    $sql->where("users_data.escort_type", $value);
+                }
+            }
+            $sql->where('users_data.field', $columnname);
+            $sql->where('users_data.content', $res->id);
+            $sql->selectRaw('COUNT(*) as total');
+            $data[] = array(
+                'id' => $res->id,
+                'content' => $res->content,
+                'total' => $sql->first()->total,
+            );
+        }
+        return json_decode(json_encode($data), FALSE);
+
+    }
+
 }
