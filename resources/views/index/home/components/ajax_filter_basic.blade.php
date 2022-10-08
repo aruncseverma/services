@@ -1,0 +1,3 @@
+@include('Index::common.ajaxfilters.basic', ['param' => $values['param'], 'femaleTotal' => $values['femaleTotal'], 'maleTotal' => $values['maleTotal'], 'bysexualTotal' => $values['bysexualTotal'], 'hetroTotal' => $values['hetroTotal'], 'ethnicityOptions' => $values['ethnicityOptions'], 'total_availability' => $values['total_availability'], 'verified' => $values['verified'], 'silver' => $values['silver'], 'gold' => $values['gold'] ])
+
+@include('Index::common.filterscripts')

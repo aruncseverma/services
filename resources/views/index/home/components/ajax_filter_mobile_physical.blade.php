@@ -1,0 +1,2 @@
+@include('Index::common.ajaxfilters.physical_mobile', ['param' => $values['param'], 'hairColors' => $values['hairColors'], 'cupSizeOptions' => $values['cupSizeOptions'], 'buildOptions' => $values['buildOptions'], 'hairLengthOptions' => $values['hairLengthOptions'], 'eyeColors' => $values['eyeColors'], 'publicHairs' => $values['publicHairs']])
+@include('Index::common.filterscripts')

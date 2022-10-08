@@ -797,9 +797,18 @@ Route::group(['prefix' => '/', 'namespace' => 'Index', 'middleware' => 'switch.l
         $route->get('/location/{country}', ['uses' => 'IndexController@view', 'as' => 'index.country']);
         $route->get('/location/{country}/{state}', ['uses' => 'IndexController@view', 'as' => 'index.state']);
         $route->get('/location/{country}/{state}/{city}', ['uses' => 'IndexController@view', 'as' => 'index.city']);
-        $route->get('/filter-option', ['uses' => 'IndexController@getFilterOptions', 'as' => 'index.filteroption']);
+        $route->get('/physical-filter-option', ['uses' => 'IndexController@getFilterPhysicalAjax', 'as' => 'index.filterphysicaloption']);
+        $route->get('/extra-filter-option', ['uses' => 'IndexController@getFilterExtraAjax', 'as' => 'index.filterextraoption']);
+        $route->get('/basic-filter-option', ['uses' => 'IndexController@getFilterBasicAjax', 'as' => 'index.filterbasicoption']);
+        $route->get('/language-filter-option', ['uses' => 'IndexController@getFilterLanguageAjax', 'as' => 'index.filterlanguageoption']);
+        $route->get('/service-filter-option', ['uses' => 'IndexController@getFilterServiceAjax', 'as' => 'index.filterserviceoption']);
 
-        // ajax locations' routes
+        //Mobile filter search
+        $route->get('/physical-mobile-filter-option', ['uses' => 'IndexController@getAjaxFilterMobilePhysical', 'as' => 'index.filtermobilephysicaloption']);
+        $route->get('/extra-mobile-filter-option', ['uses' => 'IndexController@getFilterExtraMobileAjax', 'as' => 'index.filtermobileextraoption']);
+        $route->get('/language-mobile-filter-option', ['uses' => 'IndexController@getFilterLanguageMobileAjax', 'as' => 'index.filtermobilelanguageoption']);
+
+        // ajax locations' routes 
         $route->get('/escorts', ['uses' => 'EscortController@findEscort', 'as' => 'index.escort.list']);
         $route->get('/escorts/country/{countryId}', ['uses' => 'EscortController@findEscort', 'as' => 'index.escort.filter.country']);
         $route->get('/escorts/state/{stateId}', ['uses' => 'EscortController@findEscort', 'as' => 'index.escort.filter.state']);

@@ -1,0 +1,2 @@
+@include('Index::common.ajaxfilters.services', ['param' => $values['param'], 'escortServices' => $values['escortServices'], 'eroticServices' => $values['eroticServices'], 'fetishServices' => $values['fetishServices'], 'extraServices' => $values['extraServices'] ])
+@include('Index::common.filterscripts')

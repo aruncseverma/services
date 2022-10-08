@@ -391,7 +391,7 @@ class IndexController extends Controller
         return $str;
     }
 
-    protected function getFilterOptions(Request $request) {
+    protected function getFilterPhysicalAjax(Request $request) {
         $params = $request->all();
         $params2 = $params;
         $locations = app(UserLocationRepository::class);
@@ -416,14 +416,79 @@ class IndexController extends Controller
             }
         }
 
-        /*if (!empty($params['gender'])) {            
-            $minutes = 60;
-            $cookie = cookie('gender', '$gender', $minutes);
-        } elseif (empty($params['gender']) && !empty($_COOKIE['gender'])) {
-            $gender = $_COOKIE['gender'];
+        if (!empty($params['gender'])) {
+            $gender = $params['gender'];
         } else {
             $gender = 'F';
-        }*/
+        }
+
+        $cityWheres = [];
+        if (!empty($params['state_id'])
+            &&!empty($params['country_id'])
+        ) {
+            $cityWheres['country_id'] = $params['country_id'];
+        }
+
+        // get escorts
+        $escorts = $this->getEscortsCache($params2, function () use ($params) {
+            return $this->getAllEscorts($params);
+        });
+
+        if ($request->ajax()) {
+
+            $values = [
+                'param'             => $params,
+                'hairColors'        => $this->escortRepository->getEscortCountAttributes('hair_color', $params),
+                'cupSizeOptions'    => $this->escortRepository->getEscortCountAttributes('cup_size', $params),
+                'buildOptions'      => $this->escortRepository->getEscortCountAttributes('body_type', $params),
+                'hairLengthOptions' => $this->getHairLength2LinerOptions(),
+                'eyeColors'         => $this->escortRepository->getEscortCountAttributes('eye_color', $params),
+                'publicHairs'       => $this->escortRepository->getEscortCountAttributes('public_hair', $params),
+                'totalRecords'      => count($escorts)
+            ];
+    
+            if (isset($params['country_id'])) {
+                $values['states'] = $locations->getEscortLocations('state', $params['country_id']);
+            }
+            
+            if (isset($params['state_id'])) {
+                $values['cities'] = $locations->getEscortLocations('city', $params['state_id'], $cityWheres);
+            }
+            //dd($values);
+            $html = view('Index::home.components.ajax_filter_physical', [
+                'values' => $values
+            ])->render();
+
+            $data = [
+                'html' => $html,
+                'status' => 1,
+            ];
+            return response()->json($data);
+        }
+    }
+
+    public function getFilterBasicAjax(Request $request) {
+        $params = $request->all();
+        $params2 = $params;
+        $locations = app(UserLocationRepository::class);
+        if (!empty($request->getRequestUri())) {
+            $arrangement = [
+                '',
+                'excess',
+                'country',
+                'state',
+                'city'
+            ];
+
+            $uri = explode('/', $request->getRequestUri());
+            for ($k = 0; $k < count($uri); $k++) {
+                $params[$arrangement[$k]] = urldecode($uri[$k]);
+            }
+
+            if (isset($params['country'])) {
+                $params = $this->handleLocationFilter($params);
+            }
+        }
 
         if (!empty($params['gender'])) {
             $gender = $params['gender'];
@@ -448,31 +513,8 @@ class IndexController extends Controller
             $values = [
                 'param'             => $params,
                 'genderOptions'     => $this->getGenderOptions(),
-                'continents'        => $locations->getEscortLocations('continent', ''),
-                'eyeOptions'        => $this->getAttributesByName('eyes'),
                 'ethnicityOptions'  => $this->escortRepository->getEthinicityByEscortTotal($params),
-                'languages'         => $this->escortRepository->getEscortCountAttributes('languages', $params),
-                'heightOptions'     => $this->getHeightOptions(),
-                'escortServices'    => $services->getServicesFilter(1),
-                'eroticServices'    => $services->getServicesFilter(2),
-                'extraServices'     => $services->getServicesFilter(3),
-                'fetishServices'    => $services->getServicesFilter(4),
-                'hairColors'        => $this->escortRepository->getEscortCountAttributes('hair_color', $params),
-                'eyeColors'         => $this->escortRepository->getEscortCountAttributes('eye_color', $params),
-                'publicHairs'       => $this->escortRepository->getEscortCountAttributes('public_hair', $params),
-                'hairLengthOptions' => $this->getHairLength2LinerOptions(),
-                'cupSizeOptions'    => $this->escortRepository->getEscortCountAttributes('cup_size', $params),
-                'travelOptions'     => $this->escortRepository->getEscortCountAttributes('travel', $params),
-                'buildOptions'      => $this->escortRepository->getEscortCountAttributes('body_type', $params),
-                'drinkOptions'      => $this->escortRepository->getEscortCountAttributes('drink', $params),
-                'smokeOptions'      => $this->escortRepository->getEscortCountAttributes('smoke', $params),
-                'escortTypeOptions' => $this->escortRepository->getEscortCountAttributes('escort_type', $params),
-                'total_with_review' => $this->escortRepository->getTotalEscortByReview(true, $params),
-                'total_without_review' => $this->escortRepository->getTotalEscortByReview(false, $params),
-                'total_with_video' => $this->escortRepository->getTotalEscortByVideo(true, $params),
-                'total_without_video' => $this->escortRepository->getTotalEscortByVideo(false, $params),
                 'total_availability' => $this->escortRepository->getTotalEscortByAvailability($params),
-                'originOptions' => $this->escortRepository->getEscortOrigins($params),
                 'femaleTotal' => $this->escortRepository->getEscortTotalByGender('F', $params),
                 'maleTotal' => $this->escortRepository->getEscortTotalByGender('M', $params),
                 'bysexualTotal' => $this->escortRepository->getEscortTotalByGender('B', $params),
@@ -491,7 +533,450 @@ class IndexController extends Controller
                 $values['cities'] = $locations->getEscortLocations('city', $params['state_id'], $cityWheres);
             }
             //dd($values);
-            $html = view('Index::home.components.home_ajax_filter', [
+            $html = view('Index::home.components.ajax_filter_basic', [
+                'values' => $values
+            ])->render();
+
+            $data = [
+                'html' => $html,
+                'status' => 1,
+            ];
+            return response()->json($data);
+        }
+    }
+
+    public function getFilterExtraAjax(Request $request) {
+        $params = $request->all();
+        $params2 = $params;
+        $locations = app(UserLocationRepository::class);
+        if (!empty($request->getRequestUri())) {
+            $arrangement = [
+                '',
+                'excess',
+                'country',
+                'state',
+                'city'
+            ];
+
+            $uri = explode('/', $request->getRequestUri());
+            for ($k = 0; $k < count($uri); $k++) {
+                $params[$arrangement[$k]] = urldecode($uri[$k]);
+            }
+
+            if (isset($params['country'])) {
+                $params = $this->handleLocationFilter($params);
+            }
+        }
+
+        if (!empty($params['gender'])) {
+            $gender = $params['gender'];
+        } else {
+            $gender = 'F';
+        }
+
+        $cityWheres = [];
+        if (!empty($params['state_id'])
+            &&!empty($params['country_id'])
+        ) {
+            $cityWheres['country_id'] = $params['country_id'];
+        }
+
+        // get escorts
+        $escorts = $this->getEscortsCache($params2, function () use ($params) {
+            return $this->getAllEscorts($params);
+        });
+
+        if ($request->ajax()) {
+
+            $values = [
+                'param'                 => $params,
+                'escortTypeOptions'     => $this->escortRepository->getEscortCountAttributes('escort_type', $params),
+                'originOptions'         => $this->escortRepository->getEscortOrigins($params),
+                'travelOptions'         => $this->escortRepository->getEscortCountAttributes('travel', $params),
+                'smokeOptions'          => $this->escortRepository->getEscortCountAttributes('smoke', $params),
+                'drinkOptions'          => $this->escortRepository->getEscortCountAttributes('drink', $params),
+                'total_with_video'      => $this->escortRepository->getTotalEscortByVideo(true, $params),
+                'total_without_video'   => $this->escortRepository->getTotalEscortByVideo(false, $params),
+                'total_with_review'     => $this->escortRepository->getTotalEscortByReview(true, $params),
+                'total_without_review'  => $this->escortRepository->getTotalEscortByReview(false, $params),
+                'totalRecords'          => count($escorts)
+            ];
+    
+            if (isset($params['country_id'])) {
+                $values['states'] = $locations->getEscortLocations('state', $params['country_id']);
+            }
+            
+            if (isset($params['state_id'])) {
+                $values['cities'] = $locations->getEscortLocations('city', $params['state_id'], $cityWheres);
+            }
+            //dd($values);
+            $html = view('Index::home.components.ajax_filter_extra', [
+                'values' => $values
+            ])->render();
+
+            $data = [
+                'html' => $html,
+                'status' => 1,
+            ];
+            return response()->json($data);
+        }
+    }
+
+    public function getFilterLanguageAjax(Request $request) {
+        $params = $request->all();
+        $params2 = $params;
+        $locations = app(UserLocationRepository::class);
+        if (!empty($request->getRequestUri())) {
+            $arrangement = [
+                '',
+                'excess',
+                'country',
+                'state',
+                'city'
+            ];
+
+            $uri = explode('/', $request->getRequestUri());
+            for ($k = 0; $k < count($uri); $k++) {
+                $params[$arrangement[$k]] = urldecode($uri[$k]);
+            }
+
+            if (isset($params['country'])) {
+                $params = $this->handleLocationFilter($params);
+            }
+        }
+
+        if (!empty($params['gender'])) {
+            $gender = $params['gender'];
+        } else {
+            $gender = 'F';
+        }
+
+        $cityWheres = [];
+        if (!empty($params['state_id'])
+            &&!empty($params['country_id'])
+        ) {
+            $cityWheres['country_id'] = $params['country_id'];
+        }
+
+        // get escorts
+        $escorts = $this->getEscortsCache($params2, function () use ($params) {
+            return $this->getAllEscorts($params);
+        });
+
+        if ($request->ajax()) {
+
+            $values = [
+                'param'        => $params,
+                'languages'    => $this->escortRepository->getEscortCountAttributes('languages', $params),
+                'totalRecords' => count($escorts)
+            ];
+    
+            if (isset($params['country_id'])) {
+                $values['states'] = $locations->getEscortLocations('state', $params['country_id']);
+            }
+            
+            if (isset($params['state_id'])) {
+                $values['cities'] = $locations->getEscortLocations('city', $params['state_id'], $cityWheres);
+            }
+
+            $html = view('Index::home.components.ajax_filter_language', [
+                'values' => $values
+            ])->render();
+
+            $data = [
+                'html' => $html,
+                'status' => 1,
+            ];
+            return response()->json($data);
+        }
+    }
+
+    public function getFilterServiceAjax(Request $request) {
+        $params = $request->all();
+        $params2 = $params;
+        $locations = app(UserLocationRepository::class);
+        $services = app(ServiceRepository::class);
+        if (!empty($request->getRequestUri())) {
+            $arrangement = [
+                '',
+                'excess',
+                'country',
+                'state',
+                'city'
+            ];
+
+            $uri = explode('/', $request->getRequestUri());
+            for ($k = 0; $k < count($uri); $k++) {
+                $params[$arrangement[$k]] = urldecode($uri[$k]);
+            }
+
+            if (isset($params['country'])) {
+                $params = $this->handleLocationFilter($params);
+            }
+        }
+
+        if (!empty($params['gender'])) {
+            $gender = $params['gender'];
+        } else {
+            $gender = 'F';
+        }
+
+        $cityWheres = [];
+        if (!empty($params['state_id'])
+            &&!empty($params['country_id'])
+        ) {
+            $cityWheres['country_id'] = $params['country_id'];
+        }
+
+        // get escorts
+        $escorts = $this->getEscortsCache($params2, function () use ($params) {
+            return $this->getAllEscorts($params);
+        });
+
+        if ($request->ajax()) {
+
+            $values = [
+                'param'             => $params,
+                'escortServices'    => $services->getServicesFilter(1),
+                'eroticServices'    => $services->getServicesFilter(2),
+                'extraServices'     => $services->getServicesFilter(3),
+                'fetishServices'    => $services->getServicesFilter(4),
+                'totalRecords'      => count($escorts)
+            ];
+    
+            if (isset($params['country_id'])) {
+                $values['states'] = $locations->getEscortLocations('state', $params['country_id']);
+            }
+            
+            if (isset($params['state_id'])) {
+                $values['cities'] = $locations->getEscortLocations('city', $params['state_id'], $cityWheres);
+            }
+            
+            $html = view('Index::home.components.ajax_filter_service', [
+                'values' => $values
+            ])->render();
+
+            $data = [
+                'html' => $html,
+                'status' => 1,
+            ];
+            return response()->json($data);
+        }
+    }
+
+    public function getAjaxFilterMobilePhyisical(Request $request) {
+        $params = $request->all();
+        $params2 = $params;
+        $locations = app(UserLocationRepository::class);
+        if (!empty($request->getRequestUri())) {
+            $arrangement = [
+                '',
+                'excess',
+                'country',
+                'state',
+                'city'
+            ];
+
+            $uri = explode('/', $request->getRequestUri());
+            for ($k = 0; $k < count($uri); $k++) {
+                $params[$arrangement[$k]] = urldecode($uri[$k]);
+            }
+
+            if (isset($params['country'])) {
+                $params = $this->handleLocationFilter($params);
+            }
+        }
+
+        if (!empty($params['gender'])) {
+            $gender = $params['gender'];
+        } else {
+            $gender = 'F';
+        }
+
+        $cityWheres = [];
+        if (!empty($params['state_id'])
+            &&!empty($params['country_id'])
+        ) {
+            $cityWheres['country_id'] = $params['country_id'];
+        }
+
+        // get escorts
+        $escorts = $this->getEscortsCache($params2, function () use ($params) {
+            return $this->getAllEscorts($params);
+        });
+
+        if ($request->ajax()) {
+
+            $values = [
+                'param'             => $params,
+                'genderOptions'     => $this->getGenderOptions(),
+                'ethnicityOptions'  => $this->escortRepository->getEthinicityByEscortTotal($params),
+                'total_availability' => $this->escortRepository->getTotalEscortByAvailability($params),
+                'femaleTotal' => $this->escortRepository->getEscortTotalByGender('F', $params),
+                'maleTotal' => $this->escortRepository->getEscortTotalByGender('M', $params),
+                'bysexualTotal' => $this->escortRepository->getEscortTotalByGender('B', $params),
+                'hetroTotal' => $this->escortRepository->getEscortTotalByGender('C', $params),
+                'verified' => $this->escortRepository->getEscortVerificationCount('1', $params),
+                'silver' => $this->escortRepository->getEscortSilverGoldCount(2, $params),
+                'gold' => $this->escortRepository->getEscortSilverGoldCount(3, $params),
+                'totalRecords' => count($escorts)
+            ];
+    
+            if (isset($params['country_id'])) {
+                $values['states'] = $locations->getEscortLocations('state', $params['country_id']);
+            }
+            
+            if (isset($params['state_id'])) {
+                $values['cities'] = $locations->getEscortLocations('city', $params['state_id'], $cityWheres);
+            }
+            //dd($values);
+            $html = view('Index::home.components.ajax_filter_mobile_physical', [
+                'values' => $values
+            ])->render();
+
+            $data = [
+                'html' => $html,
+                'status' => 1,
+            ];
+            return response()->json($data);
+        }
+    }
+
+    public function getFilterExtraMobileAjax(Request $request) {
+        $params = $request->all();
+        $params2 = $params;
+        $locations = app(UserLocationRepository::class);
+        if (!empty($request->getRequestUri())) {
+            $arrangement = [
+                '',
+                'excess',
+                'country',
+                'state',
+                'city'
+            ];
+
+            $uri = explode('/', $request->getRequestUri());
+            for ($k = 0; $k < count($uri); $k++) {
+                $params[$arrangement[$k]] = urldecode($uri[$k]);
+            }
+
+            if (isset($params['country'])) {
+                $params = $this->handleLocationFilter($params);
+            }
+        }
+
+        if (!empty($params['gender'])) {
+            $gender = $params['gender'];
+        } else {
+            $gender = 'F';
+        }
+
+        $cityWheres = [];
+        if (!empty($params['state_id'])
+            &&!empty($params['country_id'])
+        ) {
+            $cityWheres['country_id'] = $params['country_id'];
+        }
+
+        // get escorts
+        $escorts = $this->getEscortsCache($params2, function () use ($params) {
+            return $this->getAllEscorts($params);
+        });
+
+        if ($request->ajax()) {
+
+            $values = [
+                'param'                 => $params,
+                'escortTypeOptions'     => $this->escortRepository->getEscortCountAttributes('escort_type', $params),
+                'originOptions'         => $this->escortRepository->getEscortOrigins($params),
+                'travelOptions'         => $this->escortRepository->getEscortCountAttributes('travel', $params),
+                'smokeOptions'          => $this->escortRepository->getEscortCountAttributes('smoke', $params),
+                'drinkOptions'          => $this->escortRepository->getEscortCountAttributes('drink', $params),
+                'total_with_video'      => $this->escortRepository->getTotalEscortByVideo(true, $params),
+                'total_without_video'   => $this->escortRepository->getTotalEscortByVideo(false, $params),
+                'total_with_review'     => $this->escortRepository->getTotalEscortByReview(true, $params),
+                'total_without_review'  => $this->escortRepository->getTotalEscortByReview(false, $params),
+                'totalRecords'          => count($escorts)
+            ];
+    
+            if (isset($params['country_id'])) {
+                $values['states'] = $locations->getEscortLocations('state', $params['country_id']);
+            }
+            
+            if (isset($params['state_id'])) {
+                $values['cities'] = $locations->getEscortLocations('city', $params['state_id'], $cityWheres);
+            }
+            //dd($values);
+            $html = view('Index::home.components.ajax_filter_mobile_extra', [
+                'values' => $values
+            ])->render();
+
+            $data = [
+                'html' => $html,
+                'status' => 1,
+            ];
+            return response()->json($data);
+        }
+    }
+
+    public function getFilterLanguageMobileAjax(Request $request) {
+        $params = $request->all();
+        $params2 = $params;
+        $locations = app(UserLocationRepository::class);
+        if (!empty($request->getRequestUri())) {
+            $arrangement = [
+                '',
+                'excess',
+                'country',
+                'state',
+                'city'
+            ];
+
+            $uri = explode('/', $request->getRequestUri());
+            for ($k = 0; $k < count($uri); $k++) {
+                $params[$arrangement[$k]] = urldecode($uri[$k]);
+            }
+
+            if (isset($params['country'])) {
+                $params = $this->handleLocationFilter($params);
+            }
+        }
+
+        if (!empty($params['gender'])) {
+            $gender = $params['gender'];
+        } else {
+            $gender = 'F';
+        }
+
+        $cityWheres = [];
+        if (!empty($params['state_id'])
+            &&!empty($params['country_id'])
+        ) {
+            $cityWheres['country_id'] = $params['country_id'];
+        }
+
+        // get escorts
+        $escorts = $this->getEscortsCache($params2, function () use ($params) {
+            return $this->getAllEscorts($params);
+        });
+
+        if ($request->ajax()) {
+
+            $values = [
+                'param'        => $params,
+                'languages'    => $this->escortRepository->getEscortCountAttributes('languages', $params),
+                'totalRecords' => count($escorts)
+            ];
+    
+            if (isset($params['country_id'])) {
+                $values['states'] = $locations->getEscortLocations('state', $params['country_id']);
+            }
+            
+            if (isset($params['state_id'])) {
+                $values['cities'] = $locations->getEscortLocations('city', $params['state_id'], $cityWheres);
+            }
+
+            $html = view('Index::home.components.ajax_filter_mobile_language', [
                 'values' => $values
             ])->render();
 

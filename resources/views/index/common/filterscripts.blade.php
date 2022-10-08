@@ -3,8 +3,18 @@ $(document).ready(function () {
     
     var $filterUrl = '{{route("index.filter")}}';
     var $locationDataUrl = '{{route("index.locationdata")}}';
-    var $filterOptionUrl = '{{route("index.filteroption")}}';
+    var $physicalfilterUrl = '{{route("index.filterphysicaloption")}}';
+    var $basicFilterUrl = '{{route("index.filterbasicoption")}}';
+    var $extraFilterUrl = '{{route("index.filterextraoption")}}';
+    var $languageFilterUrl = '{{route("index.filterextraoption")}}';
+    var $serviceFilterUrl = '{{route("index.filterserviceoption")}}';
+    
+    var $filterPhysicalMobile = '{{route("index.filtermobilephysicaloption")}}';
+    var $filterExtraMobile = '{{route("index.filtermobileextraoption")}}';
+    var $filterLanguageMobile = '{{route("index.filtermobilelanguageoption")}}';
+
     var $filterParams = {};
+    var $activeTab = '';
     var $lastclickeditem = '';
     window.location.search
         .replace(/[?&]+([^=&]+)=([^&]*)/gi, function(str, key, value) {
@@ -23,9 +33,7 @@ $(document).ready(function () {
         isAll = typeof isAll !== 'undefined' && isAll != '' ? isAll : false;
         if (isAll) {
             $filterParams = {}; // reset
-        }          
-
-        
+        }  
 
         fnAjax({
             url: $filterUrl,
@@ -33,16 +41,13 @@ $(document).ready(function () {
             success: function(data) {
                 if (isAll) {
                     var $filterFullUrl = $('#all_escort').attr('href');
-                    //fnResetFilter();
                     $('#all_escort').addClass('active');
                 } else {
                     var $filterFullUrl = $filterUrl + '?' + $.param($filterParams);
                     $filterFullUrl = decodeURIComponent($filterFullUrl);
                     $('#all_escort').removeClass('active');
-                    //fnAutoSetValue();
                 }
                 window.history.pushState("", "", $filterFullUrl);
-                console.log($filterParams);
                 if (typeof data.status !== 'undefined') {
                     if (data.status == 1) {
                         var $content = $(data.html);
@@ -84,20 +89,146 @@ $(document).ready(function () {
         });
 
         // Load the filter HTML
-        fnAjax({
-            url: $filterOptionUrl,
-            data: $filterParams,
-            success: function(data) {
-                $('.presearchtab').remove();
-                $( "<div class='resp-tabs-container hor_1 presearchtab'></div>" ).insertAfter( ".resp-tabs-list" );
-                //$('.resp-tabs-container').addClass('presearchtab');
-                $('.resp-tabs-container').append($(data.html));                   
-            }
-        });
+        if($activeTab == 'physical') {
+            fnAjax({
+                url: $physicalfilterUrl,
+                data: $filterParams,
+                success: function(data) {
+                    $('#filter_physical').html('');
+                    $('#filter_physical').append($(data.html)); 
+                    var lis = $("ul.resp-tabs-list > li");
+                    lis.removeClass("resp-tab-active");
+                    $('.hor_1').removeClass('resp-tab-content-active');
+                    $('.hor_1').removeAttr('style');
+                    $("ul.resp-tabs-list > li:nth-child(3)").addClass("resp-tab-active"); 
+                    $('#filter_physical').addClass('resp-tab-content-active');                  
+                }
+            });
+        }
+
+        if($activeTab == 'physicalM') {
+            fnAjax({
+                url: $filterPhysicalMobile,
+                data: $filterParams,
+                success: function(data) {
+                    console.log('phyoisacalm');
+                    $('#physicalfiltermobile').html('');
+                    $('#physicalfiltermobile').append($(data.html));
+                    var lis = $("ul.resp-tabs-list > li");
+                    lis.removeClass("resp-tab-active");
+                    $('.hor_2').removeClass('resp-tab-content-active');
+                    $('.hor_2').removeAttr('style');
+                    $("ul.resp-tabs-list > li:nth-child(2)").addClass("resp-tab-active"); 
+                    $('#extrafiltermobile').addClass('resp-tab-content-active');                 
+                }
+            });
+        }
+
+        if($activeTab == 'basic') {
+            fnAjax({
+                url: $basicFilterUrl,
+                data: $filterParams,
+                success: function(data) {
+                    $('#basic_search').html('');
+                    $('#basic_search').append($(data.html));   
+                    var lis = $("ul.resp-tabs-list > li");
+                    lis.removeClass("resp-tab-active");
+                    $('.hor_1').removeClass('resp-tab-content-active');
+                    $('.hor_1').removeAttr('style');
+                    $("ul.resp-tabs-list > li:nth-child(1)").addClass("resp-tab-active"); 
+                    $('#basic_search').addClass('resp-tab-content-active');              
+                }
+            });
+        }
+
+        if($activeTab == 'extra') {
+            fnAjax({
+                url: $extraFilterUrl,
+                data: $filterParams,
+                success: function(data) {
+                    $('#filter_extra').html('');
+                    $('#filter_extra').append($(data.html));   
+                    var lis = $("ul.resp-tabs-list > li");
+                    lis.removeClass("resp-tab-active");
+                    $('.hor_1').removeClass('resp-tab-content-active');
+                    $('.hor_1').removeAttr('style');
+                    $("ul.resp-tabs-list > li:nth-child(4)").addClass("resp-tab-active"); 
+                    $('#filter_extra').addClass('resp-tab-content-active');                 
+                }
+            });
+        }
+
+        if($activeTab == 'extraM') {
+            fnAjax({
+                url: $filterExtraMobile,
+                data: $filterParams,
+                success: function(data) {
+                    $('#extrafiltermobile').html('');
+                    $('#extrafiltermobile').append($(data.html));  
+                    var lis = $("ul.resp-tabs-list > li");
+                    lis.removeClass("resp-tab-active");
+                    $('.hor_2').removeClass('resp-tab-content-active');
+                    $('.hor_2').removeAttr('style');
+                    $("ul.resp-tabs-list > li:nth-child(2)").addClass("resp-tab-active"); 
+                    $('#extrafiltermobile').addClass('resp-tab-content-active');                  
+                }
+            });
+        }
+
+        if($activeTab == 'language') {
+            fnAjax({
+                url: $languageFilterUrl,
+                data: $filterParams,
+                success: function(data) {
+                    $('#langfilter').html('');
+                    $('#langfilter').append($(data.html));   
+                    var lis = $("ul.resp-tabs-list > li");
+                    lis.removeClass("resp-tab-active");
+                    $('.hor_1').removeClass('resp-tab-content-active');
+                    $('.hor_1').removeAttr('style');
+                    $("ul.resp-tabs-list > li:nth-child(5)").addClass("resp-tab-active"); 
+                    $('#langfilter').addClass('resp-tab-content-active');                 
+                }
+            });
+        }
+
+        if($activeTab == 'languageM') {
+            fnAjax({
+                url: $filterLanguageMobile,
+                data: $filterParams,
+                success: function(data) {
+                    $('#languageFilterMobile').html('');
+                    $('#languageFilterMobile').append($(data.html));   
+                    var lis = $("ul.resp-tabs-list > li");
+                    lis.removeClass("resp-tab-active");
+                    $('.hor_2').removeClass('resp-tab-content-active');
+                    $('.hor_2').removeAttr('style');
+                    $("ul.resp-tabs-list > li:nth-child(2)").addClass("resp-tab-active"); 
+                    $('#extrafiltermobile').addClass('resp-tab-content-active');                 
+                }
+            });
+        }
+
+        if($activeTab == 'service') {
+            fnAjax({
+                url: $serviceFilterUrl,
+                data: $filterParams,
+                success: function(data) {
+                    $('#langfilter').html('');
+                    $('#langfilter').append($(data.html));   
+                    var lis = $("ul.resp-tabs-list > li");
+                    lis.removeClass("resp-tab-active");
+                    $('.hor_1').removeClass('resp-tab-content-active');
+                    $('.hor_1').removeAttr('style');
+                    $("ul.resp-tabs-list > li:nth-child(5)").addClass("resp-tab-active"); 
+                    $('#langfilter').addClass('resp-tab-content-active');                 
+                }
+            });
+        }
         return true;
     }
     
-    $('#searchFilter').easyResponsiveTabs({
+    /*$('#searchFilter').easyResponsiveTabs({
         type: 'default',
         width: 'auto',
         fit: true,
@@ -120,7 +251,7 @@ $(document).ready(function () {
         inactive_bg: '#F5F5F5',
         active_border_color: '#c1c1c1',
         active_content_border_color: '#5AB1D0'
-    });
+    });*/
 
     $(".escortG input[id^='escortG']").on('click', function(){
         $(".escortG label").removeClass("active");
@@ -178,6 +309,7 @@ $(document).ready(function () {
             ) {
                 $filterParams[$filterName] = $elm.val();
                 $lastclickeditem = 'price';
+                $activeTab = 'basic';
                 fnFilterEscorts();
             }
         }
@@ -207,6 +339,7 @@ $(document).ready(function () {
             ) {
                 $filterParams[$filterName] = $elm.val();
                 $lastclickeditem = 'age';
+                $activeTab = 'basic';
                 fnFilterEscorts();
             }
         }
@@ -235,6 +368,7 @@ $(document).ready(function () {
             ) {
                 $lastclickeditem = $filterName;
                 $filterParams[$filterName] = $elm.val();
+                $activeTab = 'physical';
                 fnFilterEscorts();
             }
         }
@@ -262,6 +396,7 @@ $(document).ready(function () {
             ) {
                 $lastclickeditem = $filterName;
                 $filterParams[$filterName] = $elm.val();
+                $activeTab = 'physicalM';
                 fnFilterEscorts();
             }
         }
@@ -290,6 +425,7 @@ $(document).ready(function () {
         ) {
             $filterParams[$filterName] = $elm.val();
             $lastclickeditem = $filterName;
+            $activeTab = 'basic';
             fnFilterEscorts();
         }
     });
@@ -304,6 +440,7 @@ $(document).ready(function () {
         ) {
             $lastclickeditem = $filterName;
             $filterParams[$filterName] = $elm.val();
+            $activeTab = 'basic';
             fnFilterEscorts();
         }
     });
@@ -319,6 +456,7 @@ $(document).ready(function () {
         ) {
             $lastclickeditem = $filterName;
             $filterParams[$filterName] = $elm.val();
+            $activeTab = 'physical';
             fnFilterEscorts();
         }
     });
@@ -334,6 +472,7 @@ $(document).ready(function () {
         ) {
             $lastclickeditem = $filterName;
             $filterParams[$filterName] = $elm.val();
+            $activeTab = 'physicalM';
             fnFilterEscorts();
         }
     });
@@ -347,6 +486,7 @@ $(document).ready(function () {
         ) {
             $lastclickeditem = $filterName;
             $filterParams[$filterName] = $elm.val();
+            $activeTab = 'extra';
             fnFilterEscorts();
         }
     });
@@ -359,6 +499,7 @@ $(document).ready(function () {
         ) {
             $lastclickeditem = $filterName;
             $filterParams[$filterName] = $elm.val();
+            $activeTab = 'extraM';
             fnFilterEscorts();
         }
     });
@@ -377,8 +518,22 @@ $(document).ready(function () {
         });
         $lastclickeditem = $filterName;
         $filterParams[$filterName] = $langSelected.join(',');
+        $activeTab = 'language';
         fnFilterEscorts();
     });        
+
+    //Languages mobile filter
+    $('#languageFilterMobile').on('change',function() {            
+        var $filterName = 'lang_ids';
+        var $langSelected = [];
+        $("#languageFilterMobile option:selected").each(function() {
+            $langSelected.push($(this).val());
+        });
+        $lastclickeditem = $filterName;
+        $filterParams[$filterName] = $langSelected.join(',');
+        $activeTab == 'languageM'
+        fnFilterEscorts();
+    });
 
     // Escort Services filter
     $('#filter_escort_services').on('change', function() {            
@@ -389,6 +544,7 @@ $(document).ready(function () {
         });
         $lastclickeditem = $filterName;
         $filterParams[$filterName] = $optSelected.join(',');
+        $activeTab = 'service';
         fnFilterEscorts();
     });
 
@@ -406,6 +562,7 @@ $(document).ready(function () {
         });
         $lastclickeditem = $filterName;
         $filterParams[$filterName] = $optSelected.join(',');
+        $activeTab = 'service';
         fnFilterEscorts();
     });
 
@@ -423,6 +580,7 @@ $(document).ready(function () {
         });
         $lastclickeditem = $filterName;
         $filterParams[$filterName] = $optSelected.join(',');
+        $activeTab = 'service';
         fnFilterEscorts();
     });
 
@@ -440,6 +598,7 @@ $(document).ready(function () {
         });
         $lastclickeditem = $filterName;
         $filterParams[$filterName] = $optSelected.join(',');
+        $activeTab = 'service';
         fnFilterEscorts();
     });
 

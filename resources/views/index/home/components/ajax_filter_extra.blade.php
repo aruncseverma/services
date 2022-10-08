@@ -1,0 +1,2 @@
+@include('Index::common.ajaxfilters.extra', ['param' => $values['param'], 'escortTypeOptions' => $values['escortTypeOptions'], 'originOptions' => $values['originOptions'], 'travelOptions' => $values['travelOptions'], 'smokeOptions' => $values['smokeOptions'], 'drinkOptions' => $values['drinkOptions'], 'total_with_video' => $values['total_with_video'], 'total_without_video' => $values['total_without_video'], 'total_with_review' => $values['total_with_review'], 'total_without_review' => $values['total_without_review']])
+@include('Index::common.filterscripts')
